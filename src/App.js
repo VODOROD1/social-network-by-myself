@@ -19,6 +19,7 @@ function App() {
         </nav>
       </div>
       <div className='content'>
+        Here is some content!
         <Dialogs />
       </div>
     </div>
