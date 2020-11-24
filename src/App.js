@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Dialogs from './components/Dialogs/Dialogs.jsx';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         </nav>
       </div>
       <div className='content'>
-        Here is some content!
+        <Dialogs />
       </div>
     </div>
   );
