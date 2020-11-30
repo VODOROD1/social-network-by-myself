@@ -6,7 +6,7 @@ const ProfileInfo = (props) => {
     <div>
       <img src='https://wallbox.ru/wallpapers/main2/201742/zakat-more-plaz-tropiki12.jpg' 
             alt='здесь расположена аватарка' className={styles.ava}/>
-      <div>
+      <div className={styles.descriptionBlock}>
         Login
         <br></br>
         status

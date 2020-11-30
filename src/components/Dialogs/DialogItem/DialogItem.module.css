@@ -1,0 +1,8 @@
+.dialogItem {
+  color: black;
+  margin: 10px;
+}
+
+.dialogItem a {
+  text-decoration: none;
+}

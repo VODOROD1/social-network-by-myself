@@ -1,36 +1,29 @@
 import  React from 'react';
-import Post from './Post';
+import Post from './Post/Post';
+import {updateNewPostTextAC,addNewPostACT} from '../../redux/profile-reducer';
 
 const MyPosts = (props) => {
-  let [posts, setPosts] = React.useState(
-    [
-      {
-        postText: 'Hi, how are you?',
-        likesCount: 12
-      },
-      {
-        postText: "It's my first post",
-        likesCount: 12
-      },
-      {
-        postText: 'BlaBla',
-        likesCount: 13
-      },
-      {
-        postText: 'Dada',
-        likesCount: 14
-      }
-    ]
-  )
+
+  const updateNewPostText = (e) => {
+    let action = updateNewPostTextAC(e.target.value)
+    props.dispatch(action)
+  }
+  const addNewPost = (e) => {
+    let action = addNewPostACT()
+    props.dispatch(action)
+  }
   return (
     <div>
-      <textarea placeholder='Enter your post'></textarea>
-      <button>Add post</button>
-      {posts.map(post => <Post postText={post.postText} 
+      <textarea onInput={updateNewPostText} placeholder='Enter your post' 
+                value={props.newPostText}></textarea>
+      <div>
+        <button onClick={addNewPost}>Add post</button>
+      </div>
+      {props.posts.map(post => <Post postText={post.postText} 
                               likesCount={post.likesCount}/>)}
-        
     </div>
   )
+
 }
 
 export default MyPosts;

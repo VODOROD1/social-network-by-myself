@@ -3,11 +3,11 @@
   background-color: lightgreen;
 }
 .item {
-  
+  margin-bottom: 10px;
 }
 .item a {
   text-decoration: none;
 }
 .active {
-  
+  color: gold;
 }
