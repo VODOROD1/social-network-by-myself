@@ -1,16 +1,13 @@
 import  React from 'react';
 import Post from './Post/Post';
-import {updateNewPostTextAC,addNewPostACT} from '../../redux/profile-reducer';
 
 const MyPosts = (props) => {
 
   const updateNewPostText = (e) => {
-    let action = updateNewPostTextAC(e.target.value)
-    props.dispatch(action)
+    props.updateNewPostText(e.target.value)
   }
   const addNewPost = (e) => {
-    let action = addNewPostACT()
-    props.dispatch(action)
+    props.addNewPost()
   }
   return (
     <div>

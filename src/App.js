@@ -1,15 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import {Route,withRouter} from 'react-router-dom';
-import {connect} from 'react-redux';
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
-import Users from './components/Users/Users';
+import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
 
 class App extends React.Component {
@@ -24,24 +22,24 @@ class App extends React.Component {
         <div className='app-wrapper-content'>
           <Route path='/profile' key={1} 
                   render={() => 
-                      <Profile posts={this.props.state.profilePage.posts} newPostText={this.props.state.profilePage.newPostText}
-                              dispatch={this.props.dispatch}
-                  />}
+                      <Profile />}
           />
           <Route path='/dialogs' key={2} 
                   render={() => 
-                      <Dialogs dialogItems={this.props.state.dialogsPage.dialogItems} messages={this.props.state.dialogsPage.messages}
-                                dispatch={this.props.dispatch} newMessageText={this.props.state.dialogsPage.newMessageText}
-                      />}
+                      <DialogsContainer />}
           />
           <Route path='/news' key={3} 
-                  render={() => <News />}/>
+                  render={() => <News />}
+          />
           <Route path='/music' key={4} 
-                  render={() => <Music />}/>
+                  render={() => <Music />}
+          />
           <Route path='/users' key={5} 
-                  render={() => <Users />}/>
+                  render={() => <UsersContainer />}
+          />
           <Route path='/settings' key={6} 
-                  render={() => <Settings />}/>
+                  render={() => <Settings />}
+          />
         </div>
       </div>
     );
