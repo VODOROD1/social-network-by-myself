@@ -4,16 +4,19 @@ import styles from './ProfileInfo.module.css';
 const ProfileInfo = (props) => {
   return (
     <div>
-      <img src='https://wallbox.ru/wallpapers/main2/201742/zakat-more-plaz-tropiki12.jpg' 
+      <img src={props.profile.photos.large} 
             alt='здесь расположена аватарка' className={styles.ava}/>
       <div className={styles.descriptionBlock}>
-        Login
+        Login - {props.profile.fullName}
         <br></br>
-        status
+        status - {props.profile.lookingForAJobDescription}
         <br></br>
-        About me -
+        About me - {props.profile.aboutMe}
         <br></br>
-        <b>Contacts</b>
+        <b>Contacts:</b>
+        <span>{props.profile.contacts.vk}</span>
+        <br></br>
+        <span>{props.profile.contacts.github}</span>
       </div>
     </div>
   )

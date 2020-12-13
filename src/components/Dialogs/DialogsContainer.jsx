@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import {connect} from 'react-redux'
 import Dialogs from './Dialogs';
 import {updateNewMessageTextAC, addNewMessageAC} from '../../redux/dialogs-reducer';
 
@@ -6,21 +7,40 @@ const DialogsContainer = (props) => {
   debugger;
   const addNewMessage = (e) => {
     let action = addNewMessageAC();
-    props.dispatch(action)
+    props.addNewMessage(action)
   }
-  const updateNewMessageText = (value) => {
-    let action = updateNewMessageTextAC(value)
-    props.dispatch(action)
+  const updateNewMessageText = (newMessage) => {
+    let action = updateNewMessageTextAC(newMessage)
+    props.updateNewMessageText(action)
   }
   debugger;
   return (
-    <Dialogs  dialogItems={props.stateOfDialogsPage.dialogItems} 
-              messages={props.stateOfDialogsPage.messages}
-              newMessageText={props.stateOfDialogsPage.newMessageText}
+    <Dialogs  dialogItems={props.dialogItems} 
+              messages={props.messages}
+              newMessageText={props.newMessageText}
               addNewMessage = {addNewMessage} 
               updateNewMessageText={updateNewMessageText}
     />
   )
 }
 
-export default DialogsContainer;
+const mapStateToProps = (state) => {
+  return {
+    dialogItems: state.stateOfDialogsPage.dialogItems,
+    messages: state.stateOfDialogsPage.messages,
+    newMessageText: state.stateOfDialogsPage.newMessageText,
+  }
+}
+
+const mapDispatchToProp = (dispatch) => {
+  return {
+    addNewMessage: function(action) {
+      dispatch(action)
+    },
+    updateNewMessageText: function(action) {
+      dispatch(action)
+    },
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProp)(DialogsContainer)

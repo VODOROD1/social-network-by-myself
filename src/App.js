@@ -1,9 +1,9 @@
 import React from 'react';
 import {Route,withRouter} from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
@@ -17,16 +17,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/profile' key={1} 
-                  render={() => 
-                      <Profile />}
+          <Route path='/profile/:userId?' key={1} 
+                  render={() => <ProfileContainer />}
           />
           <Route path='/dialogs' key={2} 
-                  render={() => 
-                      <DialogsContainer />}
+                  render={() => <DialogsContainer />}
           />
           <Route path='/news' key={3} 
                   render={() => <News />}

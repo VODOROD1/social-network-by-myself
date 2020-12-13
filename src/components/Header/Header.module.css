@@ -6,4 +6,6 @@ img {
 .header {
   grid-area: h;
   background-color: lightcoral;
+  display: flex;
+  height: 300px;
 }

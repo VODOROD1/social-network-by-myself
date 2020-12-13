@@ -1,0 +1,9 @@
+.preloaderWrapper {
+  background-color: none;
+}
+
+.preloader {
+  width: 400px;
+  height: 400px;
+  background-color: none;
+}

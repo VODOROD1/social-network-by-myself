@@ -1,46 +1,71 @@
-import React from 'react';
-import Users from './Users';
-import {connect} from 'react-redux';
-import {followAC,unfollowAC,setUsersAC} from '../../redux/users-reducer';
+import React from 'react'
+import Users from './Users'
+import {connect} from 'react-redux'
+import {followTC,unfollowTC,setUsersTC,setTotalCountTC,setCurrentPageAC} from '../../redux/users-reducer'
+import Preloader from '../../common/Preloader/Preloader'
 
 const UsersContainer = (props) => {
 
+  const setUsers = (currentPage) => {     // получаем профили пользователей из диапазона
+    let thunk = setUsersTC(currentPage)
+    props.setUsers(thunk)
+  }
+
+  const setTotalCount = () => {           // получаем общее количество пользователей 
+    let thunk = setTotalCountTC()
+    props.setTotalCount(thunk)
+  }
+
   const follow = (userId) => {
-    let action = followAC(userId)
-    props.follow(action)
+    let thunk = followTC(userId)
+    props.follow(thunk)
   }
 
   const unfollow = (userId) => {
-    let action = unfollowAC(userId)
-    props.unfollow(action)
+    let thunk = unfollowTC(userId)
+    props.unfollow(thunk)
   }
 
-  const setUsers = (users) => {
-    let action = setUsersAC(users)
-    props.setUsers(action)
+  const selectPage = (selectedPage) => {
+    let action = setCurrentPageAC(selectedPage)
+    props.setCurrentPage(action)
   }
 
   return (
-    <Users follow={follow} unfollow={unfollow} setUsers={setUsers} users={props.users}/>
+    <>
+      { props.isFetching ? <Preloader /> : null }
+        <Users users={props.users} follow={follow} unfollow={unfollow} setUsers={setUsers} 
+                setTotalCount={setTotalCount} selectPage={selectPage} pagesCount={props.pagesCount} 
+                currentPage={props.currentPage} arrFollowingInProgress={props.arrFollowingInProgress}/>
+    </>
   )
 }
 
 const mapStateToProps = (state) => {
-  
   return {
     users: state.stateOfUsersPage.users,
+    pagesCount: state.stateOfUsersPage.pagesCount,
+    currentPage: state.stateOfUsersPage.currentPage,
+    isFetching: state.stateOfUsersPage.isFetching,
+    arrFollowingInProgress: state.stateOfUsersPage.followingInProgress
   }
 }
-debugger;
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    follow: function(action) {
-      dispatch(action)
+    follow: function(thunk) {
+      dispatch(thunk)
     },
-    unfollow: function(action) {
-      dispatch(action)
+    unfollow: function(thunk) {
+      dispatch(thunk)
     },
-    setUsers: function(action) {
+    setUsers: function(thunk) {
+      dispatch(thunk)
+    },
+    setTotalCount: function(thunk) {
+      dispatch(thunk)
+    },
+    setCurrentPage: function(action) {
       dispatch(action)
     },
   }

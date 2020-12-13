@@ -1,0 +1,48 @@
+.pagination {
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pageNumber:hover {
+  cursor: pointer;
+}
+
+.selectedPage {
+  font-weight: bold;
+}
+
+.buttonWrapper1 {
+  height: 25px;
+  width: 60px;
+}
+
+.buttonWrapper2 {
+  height: 25px;
+  width: 30px;
+}
+
+.prevButton {
+
+}
+
+.pages {
+
+}
+
+.backButton{
+
+}
+
+.forwardButton {
+
+}
+
+.nextButton {
+
+}
+
+.unvisible {
+  display: none;
+}
