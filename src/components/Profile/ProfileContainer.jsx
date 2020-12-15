@@ -1,49 +1,59 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import axios from 'axios'
 import {withRouter} from 'react-router-dom'
+import {compose} from 'redux'
+import withAuthRedirectHOC from '../../HOC/withAuthRedirectHOC'
 import Profile from './Profile'
-import {setUserProfileAC} from '../../redux/profile-reducer'
+import {setUserTC} from '../../redux/profile-reducer'
 import Preloader from '../../common/Preloader/Preloader'
 
 const ProfileContainer = (props) => {
-  const [isFetching, setIsFetching] = React.useState(true);
-  
+  const [userId,setUserId] = React.useState()
   React.useEffect(() => {
-      setIsFetching(true)
-      let userId
+    let tempUserId
       if(!props.match.params.userId) {
-        userId = 2
-      } else {userId = props.match.params.userId}
-      axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
-            .then(response => {
-              let action = setUserProfileAC(response.data)
-              props.setUserProfile(action)
-              setIsFetching(false)
-            })
+        tempUserId = 2
+        setUserId(2)
+      } else {
+        tempUserId = props.match.params.userId
+        setUserId(props.match.params.userId)
+      }
+      let thunk = setUserTC(tempUserId)
+      props.setUserProfile(thunk)
   }, [props.match.params.userId])
+
+  // React.useEffect(() => {
+  //   debugger;
+  //   console.log(props.isFetching)
+  // },[props.isFetching])
 
   return (
     <>
-      {/* {isFetching ? <Preloader /> : null}
-      {props.profile ? <Profile profile={props.profile}/> : null} */}
-      {isFetching ? <Preloader /> : <Profile profile={props.profile}/>}
+      {
+        (props.isFetching) ? <Preloader /> : <Profile profile={props.profile} userId={userId}/>
+      }
     </>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.stateOfProfilePage.profile
+    profile: state.stateOfProfilePage.profile,
+    isFetching: state.stateOfProfilePage.isFetching,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUserProfile: (action) => {
-      dispatch(action)
+    setUserProfile: (thunk) => {
+      dispatch(thunk)
     } 
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(ProfileContainer))
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withRouter,
+  withAuthRedirectHOC,
+)(ProfileContainer)
+

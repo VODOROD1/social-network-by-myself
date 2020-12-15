@@ -1,3 +1,5 @@
+import {authAPI} from '../DAL/api'
+
 const LOGIN = 'LOGIN'
 const EXIT = 'EXIT'
 const AUTH_ME = 'AUTH_ME'
@@ -8,9 +10,9 @@ let initialState = {
   resultCode: 0,
   messages: [],
   data: {
-    id: 0,
-    login: '',
-    email: '',
+    id: null,
+    login: null,
+    email: null,
   }
 }
 
@@ -23,30 +25,59 @@ const authReducer = (state=initialState,action) => {
       return state
     }
     case AUTH_ME: {
-      return {...state, data: {...action.authData}}
+      return {...state, isAuth: action.isAuth, data: {...action.authData}}
     }
     default:
       return state
   }
 }
 
-export const authMeAC = (authData) => {
+// Далее идут action creators
+const authMeAC = (authData,isAuth) => {
   return {
     type: AUTH_ME,
-    authData
+    authData,
+    isAuth
   }
 }
 
-export const authLoginAC = (authData) => {
+const authLoginAC = (authData) => {
   return {
     type: LOGIN,
     authData
   }
 }
 
-export const exitAC = () => {
+const exitAC = () => {
   return {
     type: EXIT
+  }
+}
+
+// Далее идут thunk creators
+export const authMeTC = () => {
+  return (dispatch) => {
+      authAPI.authMe()
+            .then(data => {
+              if(data.resultCode === 0) {
+                let action = authMeAC(data.data,true)
+                dispatch(action)
+              } else {
+                let action = authMeAC(data.data,false)
+                dispatch(action)
+              }
+            })
+  }
+}
+
+export const loginTC = (emailValue,passwordValue,rememberMe) => {
+  return (dispatch) => {
+    authAPI.login(emailValue,passwordValue,rememberMe)
+          .then(data => {
+            if(data.resultCode === 0) {
+              dispatch(authMeTC)
+            }
+          })
   }
 }
 

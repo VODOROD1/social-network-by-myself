@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route,withRouter} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
@@ -21,8 +21,6 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/Auth' key={0}
-                  render={() => <AuthContainer />}/>
           <Route path='/profile/:userId?' key={1} 
                   render={() => <ProfileContainer />}
           />
@@ -41,6 +39,8 @@ class App extends React.Component {
           <Route path='/settings' key={6} 
                   render={() => <Settings />}
           />
+          <Route path='/auth' key={7}
+                  render={() => <AuthContainer />}/>
         </div>
       </div>
     );

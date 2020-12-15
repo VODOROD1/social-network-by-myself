@@ -1,35 +1,31 @@
 import React from 'react'
 import Header from './Header'
 import {connect} from 'react-redux'
-import axios from 'axios'
-import {authMeAC} from '../../redux/auth-reducer'
+import {authMeTC} from '../../redux/auth-reducer'
 
 const HeaderContainer = (props) => {
 
   React.useEffect(() => {
-    axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',
-              {withCredentials:true} // отправляем куку
-            )
-         .then(response => {
-              let action = authMeAC(response.data.data)
-              props.setAuthData(action)
-         })
+    let thunk = authMeTC()
+    props.setAuthData(thunk)
   },[])
+  
   return (
-    <Header login={props.login}/>
+    props.isAuth !== undefined ? <Header isAuth={props.isAuth} login={props.login}/> : null
   )
 }
 
 const mapStateToProps = (state) => {
   return {
+    isAuth: state.stateOfAuth.isAuth,
     login: state.stateOfAuth.data.login
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAuthData: function(action) {
-      dispatch(action)
+    setAuthData: function(thunk) {
+      dispatch(thunk)
     }
   }
 }

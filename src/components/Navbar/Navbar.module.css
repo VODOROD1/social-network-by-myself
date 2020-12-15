@@ -4,6 +4,10 @@
 }
 .item {
   margin-bottom: 10px;
+
+}
+.item:hover {
+  cursor: pointer
 }
 .item a {
   text-decoration: none;

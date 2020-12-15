@@ -1,6 +1,6 @@
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
-import {updateNewPostTextAC,addNewPostACT} from '../../redux/profile-reducer';
+import {updateNewPostTextAC,addNewPostAC} from '../../redux/profile-reducer';
 
 const MyPostsContainer = (props) => {
   
@@ -8,8 +8,8 @@ const MyPostsContainer = (props) => {
     let action = updateNewPostTextAC(value)
     props.updateNewPostText(action)
   }
-  const addNewPost = (e) => {
-    let action = addNewPostACT()
+  const addNewPost = (newPostText) => {
+    let action = addNewPostAC(newPostText)
     props.addNewPost(action)
   }
   return (

@@ -1,6 +1,8 @@
 import React from 'react'
-import Users from './Users'
 import {connect} from 'react-redux'
+import {compose} from 'redux'
+import withAuthRedirectHOC from '../../HOC/withAuthRedirectHOC'
+import Users from './Users'
 import {followTC,unfollowTC,setUsersTC,setTotalCountTC,setCurrentPageAC} from '../../redux/users-reducer'
 import Preloader from '../../common/Preloader/Preloader'
 
@@ -71,4 +73,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(UsersContainer)
+export default compose(
+  connect(mapStateToProps,mapDispatchToProps),
+  withAuthRedirectHOC
+)(UsersContainer)

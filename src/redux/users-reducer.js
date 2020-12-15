@@ -134,8 +134,7 @@ const removeFollowingInProgressAC = (userId) => {
 export const setUsersTC = (currentPage) => {
   // newUsers
   return  (dispatch) => {
-    let action = toggleIsFetchingAC(true)
-    dispatch(action)
+    dispatch(toggleIsFetchingAC(true))
     userAPI.getUsers(currentPage).then(data => {
         let action1 = setUsersAC(data.items)
         dispatch(action1)

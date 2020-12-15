@@ -1,4 +1,3 @@
-import {connect} from 'react-redux';
 
 const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';

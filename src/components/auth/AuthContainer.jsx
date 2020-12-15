@@ -1,22 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import axios from 'axios'
-import {authLoginAC,exitAC} from '../../redux/auth-reducer'
+import {Redirect} from 'react-router-dom'
+import {loginTC,exitAC} from '../../redux/auth-reducer'
 import Auth from './Auth'
 
 const AuthContainer = (props) => {
 
-  const loginHandler = (emailValue,passwordValue) => {
-    axios.post('https://social-network.samuraijs.com/api/1.0/auth/login', {
-      withCredentials: true,
-      email: emailValue,
-      password: passwordValue
-    }).then(response => {
-      console.log(response.data)
-      let action = authLoginAC(response.data)
-      props.setAuthData(action)
-      
-    })
+  const loginHandler = (emailValue,passwordValue,checkBox) => {
+    let thunk = loginTC(emailValue,passwordValue,checkBox)
+    props.login(thunk)
+  }
+
+  if(props.isAuth) {
+    return <Redirect to={'/dialogs'}/>
   }
 
   return (
@@ -26,14 +22,14 @@ const AuthContainer = (props) => {
 
 const mapStateToProps = (state) => {
  return {
-
+    isAuth: state.stateOfAuth.isAuth
  }
 }
 
 const mapDispatchToProp = (dispatch) => {
   return {
-    setAuthData: function(action) {
-      dispatch(action)
+    login: function(thunk) {
+      dispatch(thunk)
     }
   }
 }

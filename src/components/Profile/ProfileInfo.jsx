@@ -1,5 +1,6 @@
 import  React from 'react';
 import styles from './ProfileInfo.module.css';
+import Status from './status/Status'
 
 const ProfileInfo = (props) => {
   return (
@@ -9,11 +10,11 @@ const ProfileInfo = (props) => {
       <div className={styles.descriptionBlock}>
         Login - {props.profile.fullName}
         <br></br>
-        status - {props.profile.lookingForAJobDescription}
-        <br></br>
+        {props.profile.lookingForAJobDescription}
+        <Status userId={props.userId}/>
         About me - {props.profile.aboutMe}
         <br></br>
-        <b>Contacts:</b>
+        <b>Contacts: </b>
         <span>{props.profile.contacts.vk}</span>
         <br></br>
         <span>{props.profile.contacts.github}</span>
