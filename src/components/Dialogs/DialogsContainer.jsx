@@ -2,8 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import withAuthRedirectHOC from '../../HOC/withAuthRedirectHOC'
 import {compose} from 'redux'
-import Dialogs from './Dialogs';
 import {updateNewMessageTextAC, addNewMessageAC} from '../../redux/dialogs-reducer';
+import {getDialogsItems,getMessages,getNewMessageText} from '../../redux/selectors/dialogs-selector'
+import Dialogs from './Dialogs';
 
 const DialogsContainer = (props) => {
 
@@ -28,9 +29,9 @@ const DialogsContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    dialogItems: state.stateOfDialogsPage.dialogItems,
-    messages: state.stateOfDialogsPage.messages,
-    newMessageText: state.stateOfDialogsPage.newMessageText,
+    dialogItems: getDialogsItems(state),
+    messages: getMessages(state),
+    newMessageText: getNewMessageText(state),
   }
 }
 

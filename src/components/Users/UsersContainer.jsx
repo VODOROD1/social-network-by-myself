@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
 import withAuthRedirectHOC from '../../HOC/withAuthRedirectHOC'
+import {getUsers,getPagesCount,getCurrentPage,getIsFetchingBoolVal,
+        getArrFollowingInProgress} from '../../redux/selectors/users-selector'
 import Users from './Users'
 import {followTC,unfollowTC,setUsersTC,setTotalCountTC,setCurrentPageAC} from '../../redux/users-reducer'
 import Preloader from '../../common/Preloader/Preloader'
@@ -45,11 +47,11 @@ const UsersContainer = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.stateOfUsersPage.users,
-    pagesCount: state.stateOfUsersPage.pagesCount,
-    currentPage: state.stateOfUsersPage.currentPage,
-    isFetching: state.stateOfUsersPage.isFetching,
-    arrFollowingInProgress: state.stateOfUsersPage.followingInProgress
+    users: getUsers(state),
+    pagesCount: getPagesCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetchingBoolVal(state),
+    arrFollowingInProgress: getArrFollowingInProgress(state)
   }
 }
 

@@ -3,7 +3,6 @@ import styles from './Status.module.css'
 import {connect} from 'react-redux'
 import {setStatusTC,updateStatusTC} from '../../../redux/profile-reducer'
 
-
 const Status = (props) => {
     const [isEditMode, setIsEditMode] = React.useState(false)
     const [newStatus, setNewStatus] = React.useState()

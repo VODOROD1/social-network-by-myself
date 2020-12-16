@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import {loginTC,exitAC} from '../../redux/auth-reducer'
+import {loginTC} from '../../redux/auth-reducer'
+import {getIsAuthBoolVal,getCurrentPage} from '../../redux/selectors/auth-selector'
 import Auth from './Auth'
 
 const AuthContainer = (props) => {
@@ -10,19 +11,21 @@ const AuthContainer = (props) => {
     let thunk = loginTC(emailValue,passwordValue,checkBox)
     props.login(thunk)
   }
-
-  // React.useEffect(() => {
-  //   debugger;
-  // },[props.isAuth])
+//
+  React.useEffect(() => {
+    debugger;
+  },[props.isAuth])
 
   return (
-    props.isAuth ? <Redirect to={'/dialogs'}/> : <Auth loginHandler={loginHandler}/>
+    // props.isAuth ? <Redirect to={'/dialogs'}/> : <Auth loginHandler={loginHandler}/>
+    props.isAuth ? <Redirect to={props.currentPage}/> : <Auth loginHandler={loginHandler}/>
   )
 }
 
 const mapStateToProps = (state) => {
  return {
-    isAuth: state.stateOfAuth.isAuth
+    isAuth: getIsAuthBoolVal(state),
+    currentPage: getCurrentPage(state)
  }
 }
 

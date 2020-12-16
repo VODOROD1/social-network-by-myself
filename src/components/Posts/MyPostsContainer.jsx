@@ -1,6 +1,7 @@
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import {updateNewPostTextAC,addNewPostAC} from '../../redux/profile-reducer';
+import {getPosts} from '../../redux/selectors/profile-selector'
 
 const MyPostsContainer = (props) => {
   
@@ -19,8 +20,7 @@ const MyPostsContainer = (props) => {
   )
 }
 const mapStateToProps = (state) => ({
-  posts: state.stateOfProfilePage.posts,
-  newPostText: state.stateOfProfilePage.newPostText
+  posts: getPosts(state)
 })
 const mapDispatchToProps = (dispatch) => ({
   updateNewPostText: function (action) {

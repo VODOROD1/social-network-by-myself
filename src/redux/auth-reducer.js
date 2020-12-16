@@ -4,8 +4,10 @@ const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const AUTH_ME = 'AUTH_ME'
 const SET_IS_AUTH = 'SET_IS_AUTH'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 let initialState = {
+  currentPage: '',
   isAuth: false,
   resultCode: 0,
   messages: [],
@@ -30,6 +32,9 @@ const authReducer = (state=initialState,action) => {
     }
     case AUTH_ME: {
       return {...state, isAuth: action.isAuth, data: {...action.authData}}
+    }
+    case SET_CURRENT_PAGE: {
+      return {...state, currentPage: action.path}
     }
     default:
       return state
@@ -58,10 +63,17 @@ const logoutAC = () => {
   }
 }
 
+export const setCurrentPageAC = (path) => {
+  return {
+    type: SET_CURRENT_PAGE,
+    path
+  }
+}
+
 // Далее идут thunk creators
 export const authMeTC = () => {
   return (dispatch) => {
-      authAPI.authMe()
+      return authAPI.authMe()
             .then(data => {
               if(data.resultCode === 0) {
                 let action = authMeAC(data.data,true)

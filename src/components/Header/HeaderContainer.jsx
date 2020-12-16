@@ -1,15 +1,10 @@
 import React from 'react'
 import Header from './Header'
 import {connect} from 'react-redux'
-import {authMeTC} from '../../redux/auth-reducer'
 import {logoutTC} from '../../redux/auth-reducer'
+import {getIsAuthBoolVal,getLoginName} from '../../redux/selectors/auth-selector'
 
 const HeaderContainer = (props) => {
-
-  React.useEffect(() => {
-    let thunk = authMeTC()
-    props.setAuthData(thunk)
-  },[])
 
   const logout = () => {
     let thunk = logoutTC()
@@ -17,23 +12,19 @@ const HeaderContainer = (props) => {
   }
   
   return (
-    props.isAuth !== undefined ? 
-    <Header isAuth={props.isAuth} loginName={props.loginName} logout={logout}/> : null
+    <Header isAuth={props.isAuth} loginName={props.loginName} logout={logout}/>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.stateOfAuth.isAuth,
-    loginName: state.stateOfAuth.data.login
+    isAuth: getIsAuthBoolVal(state),
+    loginName: getLoginName(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAuthData: function(thunk) {
-      dispatch(thunk)
-    },
     logout: function(thunk) {
       dispatch(thunk)
     }

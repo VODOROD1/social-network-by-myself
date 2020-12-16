@@ -1,7 +1,9 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import Preloader from '../common/Preloader/Preloader'
+import {setCurrentPageAC} from '../redux/auth-reducer'
 
 const withAuthRedirectHOC = (Comp) => {
     let WrappedComp = class extends React.Component {
@@ -9,11 +11,16 @@ const withAuthRedirectHOC = (Comp) => {
             super(props)
         }
         render() {
-            if(this.props.isAuth !== undefined){
+            debugger
+            console.log(this.props.match.path)
+            console.log(this.props.match.url)
                 if(this.props.isAuth ) {
                     return <Comp {...this.props}/>
-                } else {return <Redirect to={'/auth'}/>}
-            } else {return <Preloader />}
+                } else {
+                    let action = setCurrentPageAC(this.props.match.path)
+                    this.props.setCurrentPage(action)
+                    return <Redirect to={'/auth'}/>
+                }
         }
     }
 
@@ -24,11 +31,15 @@ const withAuthRedirectHOC = (Comp) => {
     }
     
     const mapDispatchToProps = (dispatch) => {
-        return {}
+        return {
+            setCurrentPage: (action) => {
+                dispatch(action)
+            }
+        }
     }
     
-    return connect(mapStateToProps,mapDispatchToProps)(WrappedComp)
-
+    return connect(mapStateToProps,mapDispatchToProps)(withRouter(WrappedComp))
+    // где withRouter библиотека для доступа к поисковой строке
 }
 
 export default withAuthRedirectHOC

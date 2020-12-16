@@ -1,6 +1,12 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import './App.css';
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import {compose} from 'redux'
+import {setInitializedTC} from './redux/app-reducer'
+import {getInitializedBoolVal} from './redux/selectors/app-selector'
+import Preloader from './common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import AuthContainer from './components/auth/AuthContainer';
@@ -15,7 +21,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  componentDidMount() {
+    let thunk = setInitializedTC()
+    this.props.setInitialize(thunk)
+  }
+
   render() {
+    if(!this.props.initialized) {
+      return <Preloader />
+    }
     return (
       <div className="app-wrapper">
         <HeaderContainer />
@@ -47,7 +62,24 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    initialized: getInitializedBoolVal(state)
+  }
+}
+
+const mapDispatchToProp = (dispatch) => {
+  return {
+    setInitialize: (thunk) => {
+      dispatch(thunk)
+    }
+  }
+}
+
+export default compose(
+  connect(mapStateToProps,mapDispatchToProp),
+  withRouter
+)(App)
 
 // export default compose(
 //   withRouter,
