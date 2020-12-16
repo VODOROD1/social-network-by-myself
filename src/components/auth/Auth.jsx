@@ -23,14 +23,14 @@ const Auth = (props) => {
   
   return (
     <div className={styles.auth}>
-      <form>
+
         <p className={styles.inputWrapper}><input type='email' onInput={inputEmail} 
                       placeholder={'Input email'} value={emailValue}/></p>
         <p className={styles.inputWrapper}><input type='password' onInput={inputPassword} 
                       placeholder={'Input password'} value={passwordValue}/></p>
         <p className={styles.inputWrapper}><input type='checkbox' checked={checkBox} onClick={checkBoxHandler}/></p>
         <p className={styles.inputWrapper}><button onClick={loginHandler}>Login</button><button>Exit</button></p>
-      </form>
+    
     </div>
   )
 }

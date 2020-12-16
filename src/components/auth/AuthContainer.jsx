@@ -11,12 +11,12 @@ const AuthContainer = (props) => {
     props.login(thunk)
   }
 
-  if(props.isAuth) {
-    return <Redirect to={'/dialogs'}/>
-  }
+  // React.useEffect(() => {
+  //   debugger;
+  // },[props.isAuth])
 
   return (
-    <Auth loginHandler={loginHandler}/>
+    props.isAuth ? <Redirect to={'/dialogs'}/> : <Auth loginHandler={loginHandler}/>
   )
 }
 

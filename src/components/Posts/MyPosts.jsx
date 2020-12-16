@@ -20,10 +20,6 @@ const NewPostForm = (props) => {
 const NewPostReduxForm = reduxForm({form: 'newPost'})(NewPostForm)
 
 const MyPosts = (props) => {
-
-  // const updateNewPostText = (e) => {
-  //   props.updateNewPostText(e.target.value)
-  // }
   const addNewPost = (formData) => {
     props.addNewPost(formData.newPostText)
   }

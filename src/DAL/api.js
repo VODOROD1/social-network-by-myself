@@ -8,6 +8,23 @@ const instance = axios.create({
   }
 })
 
+export const authAPI = {
+  authMe: function() { 
+    return instance.get('auth/me')
+                  .then(response => response.data)
+  },
+  login(email, password, rememberMe) {
+    return instance.post('auth/login', {
+      email, password, rememberMe
+    }).then(response => {
+        return response.data})
+  },
+  logout() {
+    return instance.delete('auth/login')
+      .then(response => response.data) 
+  }
+}
+
 export const userAPI = {
   getUser: function() {
 
@@ -43,31 +60,4 @@ export const profileAPI = {
     return instance.get('profile/status/'+ userId)
                   .then(response => response.data)
   } 
-}
-
-export const authAPI = {
-  authMe: function() { 
-    return instance.get('auth/me')
-                  .then(response => response.data)
-  },
-  // login: function(emailValue,passwordValue,rememberMe) {
-  //   return instance.post('auth/login', {
-  //               email: emailValue,
-  //               password: passwordValue,
-  //               rememberMe
-  //             }).then(response => {
-  //               debugger;
-  //               return response.data})
-  // },
-  login(email, password, rememberMe) {
-    return instance.post('auth/login', {
-      email, password, rememberMe
-    }).then(response => {
-        debugger
-        return response.data})
-  },
-  logout() {
-    return instance.delete('auth/login')
-      .then(response => response.data) 
-  }
 }

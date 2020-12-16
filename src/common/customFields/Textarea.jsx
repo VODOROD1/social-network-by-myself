@@ -1,7 +1,7 @@
 import styles from './Textarea.module.css'
 
 const Textarea = ({input,meta,...props}) => {
-    debugger;
+    
     return (
         <div className={styles.textareaWrapper}>
             <textarea className={styles.textareaField} {...input} {...props} placeholder={props.placeholder}></textarea>

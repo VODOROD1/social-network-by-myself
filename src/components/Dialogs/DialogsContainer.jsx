@@ -6,7 +6,7 @@ import Dialogs from './Dialogs';
 import {updateNewMessageTextAC, addNewMessageAC} from '../../redux/dialogs-reducer';
 
 const DialogsContainer = (props) => {
-  debugger;
+
   const addNewMessage = (e) => {
     let action = addNewMessageAC();
     props.addNewMessage(action)
@@ -15,7 +15,7 @@ const DialogsContainer = (props) => {
     let action = updateNewMessageTextAC(newMessage)
     props.updateNewMessageText(action)
   }
-  debugger;
+
   return (
     <Dialogs  dialogItems={props.dialogItems} 
               messages={props.messages}
@@ -44,8 +44,6 @@ const mapDispatchToProp = (dispatch) => {
     },
   }
 }
-
-// export default connect(mapStateToProps,mapDispatchToProp)(DialogsContainer)
 
 export default compose(
   connect(mapStateToProps,mapDispatchToProp),

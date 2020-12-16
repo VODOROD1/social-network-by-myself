@@ -7,7 +7,7 @@ export const requairedValid = (fieldValue) => {
 
 export const maxLengthCreator = (amountOfSymbols) => {
     return (fieldValue) => {
-        if(fieldValue <= amountOfSymbols) {
+        if(fieldValue.length <= amountOfSymbols) {
             return undefined
         } else {return 'Too many symbols'}
     }   

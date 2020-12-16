@@ -1,7 +1,7 @@
 import {authAPI} from '../DAL/api'
 
 const LOGIN = 'LOGIN'
-const EXIT = 'EXIT'
+const LOGOUT = 'LOGOUT'
 const AUTH_ME = 'AUTH_ME'
 const SET_IS_AUTH = 'SET_IS_AUTH'
 
@@ -21,8 +21,12 @@ const authReducer = (state=initialState,action) => {
     case LOGIN: {
       return {...action.authData}
     }
-    case EXIT: {
-      return state
+    case LOGOUT: {
+      return {...state, isAuth: false, data: {
+          id: null,
+          login: null,
+          email: null,
+      }}
     }
     case AUTH_ME: {
       return {...state, isAuth: action.isAuth, data: {...action.authData}}
@@ -48,9 +52,9 @@ const authLoginAC = (authData) => {
   }
 }
 
-const exitAC = () => {
+const logoutAC = () => {
   return {
-    type: EXIT
+    type: LOGOUT
   }
 }
 
@@ -75,7 +79,19 @@ export const loginTC = (emailValue,passwordValue,rememberMe) => {
     authAPI.login(emailValue,passwordValue,rememberMe)
           .then(data => {
             if(data.resultCode === 0) {
-              dispatch(authMeTC)
+              dispatch(authMeTC())
+            }
+          })
+  }
+}
+
+export const logoutTC = () => {
+  return dispatch => {
+    authAPI.logout()
+          .then(data => {
+            if(data.resultCode === 0) {
+              let action = logoutAC()
+              dispatch(action)
             }
           })
   }
