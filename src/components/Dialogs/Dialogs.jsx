@@ -2,13 +2,27 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import {Field,reduxForm} from 'redux-form'
+import Textarea from '../../common/customFields/Textarea'
+import {requairedValid,maxLengthCreator} from '../../validation/formValidation'
+
+const maxLength20 = maxLengthCreator(20)
+
+const DialogsForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+            <div><Field component={Textarea} type='text' placeholder='Enter new message'
+                  name='newMessage' validate={[requairedValid,maxLength20]}/></div>
+            <div><button>Add new message</button></div>
+    </form>
+  )
+}
+
+let DialogsReduxForm = reduxForm({form: 'dialogForm'})(DialogsForm)
 
 const Dialogs = (props) => {
-  const addNewMessage = (e) => {
-    props.addNewMessage()
-  }
-  const updateNewMessageText = (e) => {
-    props.updateNewMessageText(e.target.value)
+  const addNewMessage = (objField) => {
+    props.addNewMessage(objField.newMessage)
   }
   return (
     <div className={styles.dialogs}>
@@ -22,11 +36,9 @@ const Dialogs = (props) => {
             <Message message={message} id={index}/>
           )}
       </div>
-      <div className={styles.newMessage}>
-            <div><textarea onInput={updateNewMessageText} value={props.newMessageText}>
-              </textarea></div>
-            <div><button onClick={addNewMessage}>Add new message</button></div>
-      </div>
+        <div className={styles.newMessage}>
+              <DialogsReduxForm onSubmit={addNewMessage}/>
+        </div>
     </div>
   )
 }

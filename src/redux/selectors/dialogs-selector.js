@@ -6,7 +6,3 @@ export const getDialogsItems = (state) => {
 export const getMessages = (state) => {
     return state.stateOfDialogsPage.messages
 }
-
-export const getNewMessageText = (state) => {
-    return state.stateOfDialogsPage.newMessageText
-}
