@@ -4,7 +4,7 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import {Field,reduxForm} from 'redux-form'
 import Textarea from '../../common/customFields/Textarea'
-import {requairedValid,maxLengthCreator} from '../../validation/formValidation'
+import {requairedValid,maxLengthCreator} from '../../common/validation/formValidation'
 
 const maxLength20 = maxLengthCreator(20)
 

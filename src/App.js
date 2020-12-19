@@ -1,4 +1,7 @@
 import React from 'react';
+import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import store from './redux/store';
 import {Route} from 'react-router-dom';
 import './App.css';
 import {connect} from 'react-redux'
@@ -10,12 +13,15 @@ import Preloader from './common/Preloader/Preloader'
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import AuthContainer from './components/auth/AuthContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+import withSuspenseHOC from './HOC/withSuspenseHOC'
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import UsersContainer from './components/Users/UsersContainer';
 import Settings from './components/Settings/Settings';
+
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+
 
 class App extends React.Component {
   constructor(props) {
@@ -37,10 +43,16 @@ class App extends React.Component {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path='/profile/:userId?' key={1} 
-                  render={() => <ProfileContainer />}
+                  render={() => {
+                    let Profile = withSuspenseHOC(ProfileContainer)
+                    return <Profile />
+                  }}
           />
           <Route path='/dialogs' key={2} 
-                  render={() => <DialogsContainer />}
+                  render={() => {
+                    let Dialogs = withSuspenseHOC(DialogsContainer)
+                    return <Dialogs/>
+                  }}
           />
           <Route path='/news' key={3} 
                   render={() => <News />}
@@ -76,10 +88,22 @@ const mapDispatchToProp = (dispatch) => {
   }
 }
 
-export default compose(
+const WrappedApp = compose(
   connect(mapStateToProps,mapDispatchToProp),
   withRouter
 )(App)
+
+const ProvidedApp = (props) => {
+  return (
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Provider store={store}>
+        <WrappedApp />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
+export default ProvidedApp
 
 // export default compose(
 //   withRouter,

@@ -12,10 +12,6 @@ const DialogsContainer = (props) => {
     let action = addNewMessageAC(newMessageValue);
     props.addNewMessage(action)
   }
-  // const updateNewMessageText = (newMessage) => {
-  //   let action = updateNewMessageTextAC(newMessage)
-  //   props.updateNewMessageText(action)
-  // }
 
   return (
     <Dialogs  dialogItems={props.dialogItems} 
@@ -35,9 +31,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProp = (dispatch) => {
   return {
     addNewMessage: function(action) {
-      dispatch(action)
-    },
-    updateNewMessageText: function(action) {
       dispatch(action)
     },
   }

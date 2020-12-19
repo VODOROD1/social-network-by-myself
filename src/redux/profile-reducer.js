@@ -59,12 +59,7 @@ export const addNewPostAC = (newPostText) => {
     newPostText
   }
 }
-export const updateNewPostTextAC = (newText) => {
-  return {
-    type: 'UPDATE_NEW_POST_TEXT',
-    newPostText: newText
-  }
-}
+
 export const setUserProfileAC = (userProfile) => {
   return {
     type: SET_USER_PROFILE,
@@ -77,7 +72,7 @@ const toggleIsFetchingAC = (boolVal) => {
     isFetching: boolVal
   }
 }
-const setStatusAC = (newStatus) => {
+export const setStatusAC = (newStatus) => {
   return {
     type: SET_STATUS,
     newStatus
@@ -98,26 +93,21 @@ export const setUserTC = (userId) => {
 }
 
 export const setStatusTC = (userId) => {
-  return (dispatch) => {
-      profileAPI.getStatus(userId)
-                .then((data) => {
-                    let action = setStatusAC(data)
-                    dispatch(action)
-                })
+  return async(dispatch) => {
+      let response = await profileAPI.getStatus(userId)
+      let action = setStatusAC(response)
+      dispatch(action)        
   }
 }
 
 export const updateStatusTC = (newStatus) => {
-  return (dispatch) => {
-      profileAPI.updateStatus(newStatus)
-                .then(data => {
-                  if(data.resultCode === 0) {
-                    let action = setStatusAC(newStatus)
-                    dispatch(action)
-                  }
-                })
+  return async (dispatch) => {
+      let response = await profileAPI.updateStatus(newStatus)
+      if(response.resultCode === 0) {
+        let action = setStatusAC(newStatus)
+        dispatch(action)
+      }
   }
 }
-
 
 export default profileReducer;
