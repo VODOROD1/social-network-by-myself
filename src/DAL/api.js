@@ -59,5 +59,15 @@ export const profileAPI = {
   getStatus: function(userId) {
     return instance.get('profile/status/'+ userId)
                   .then(response => response.data)
+  },
+  setPhoto: function(photo) {
+    const photoObj = new FormData()
+    photoObj.append('ava',photo)
+    debugger;
+    return instance.put('/profile/photo',photoObj,{
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }).then(response => response.data)
   } 
 }

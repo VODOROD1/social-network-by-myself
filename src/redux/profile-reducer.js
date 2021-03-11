@@ -5,6 +5,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 const SET_STATUS = 'SET_STATUS'
+const SET_PHOTO = 'SET_PHOTO'
 
 let initialState = {
   posts: 
@@ -48,6 +49,8 @@ const profileReducer = (state = initialState, action) => {
       return {...state, isFetching: action.isFetching}
     case SET_STATUS:
       return {...state, status: action.newStatus}
+    case SET_PHOTO:
+      return {...state, profile: {...state.profile, photos: {...state.photos, large: action.photo}}}
     default:
       return state
   }
@@ -78,6 +81,12 @@ export const setStatusAC = (newStatus) => {
     newStatus
   }
 }
+const setPhotoAC = (photo) => {
+  return {
+    type: SET_PHOTO,
+    photo
+  }
+}
 
 //Далее идут thunk creators
 export const setUserTC = (userId) => {
@@ -105,6 +114,17 @@ export const updateStatusTC = (newStatus) => {
       let response = await profileAPI.updateStatus(newStatus)
       if(response.resultCode === 0) {
         let action = setStatusAC(newStatus)
+        dispatch(action)
+      }
+  }
+}
+
+export const setPhotoTC = (photo) => {
+  return async(dispatch) => {
+      let response = await profileAPI.setPhoto(photo)
+      debugger;
+      if(response.resultCode === 0) {
+        let action = setPhotoAC(response.data.photos.large)
         dispatch(action)
       }
   }

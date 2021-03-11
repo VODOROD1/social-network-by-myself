@@ -8,6 +8,7 @@ import {getProfile,getIsFetching} from '../../redux/selectors/profile-selector'
 import {getMyId} from '../../redux/selectors/auth-selector'
 import Profile from './Profile'
 import {setUserTC} from '../../redux/profile-reducer'
+import {setPhotoTC} from '../../redux/profile-reducer'
 
 
 const ProfileContainer = (props) => {
@@ -28,10 +29,15 @@ const ProfileContainer = (props) => {
       props.setUserProfile(thunk)
   }, [props.match.params.userId])
 
+  const setPhoto = (photo) => {
+    let thunk = setPhotoTC(photo)
+    props.setPhoto(thunk)
+  }
+
   return (
     <>
       {
-        (props.isFetching) ? <Preloader /> : <Profile profile={props.profile} userId={userId}/>
+        (props.isFetching) ? <Preloader /> : <Profile profile={props.profile} userId={userId} setPhoto={setPhoto}/>
       }
     </>
   )
@@ -48,6 +54,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setUserProfile: (thunk) => {
+      dispatch(thunk)
+    },
+    setPhoto: (thunk) => {
       dispatch(thunk)
     } 
   }

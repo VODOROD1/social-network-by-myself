@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter,HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 import {Route} from 'react-router-dom';
@@ -21,7 +21,6 @@ import Settings from './components/Settings/Settings';
 
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
-
 
 class App extends React.Component {
   constructor(props) {
@@ -94,12 +93,13 @@ const WrappedApp = compose(
 )(App)
 
 const ProvidedApp = (props) => {
+  // Используем HashRouter потому что у вас статический веб сайт
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Provider store={store}>
+    <HashRouter basename={process.env.PUBLIC_URL}>
+      <Provider store={store}> 
         <WrappedApp />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

@@ -3,10 +3,28 @@ import styles from './ProfileInfo.module.css';
 import Status from './status/Status'
 
 const ProfileInfo = (props) => {
+
+  const setPhoto = (e) => {
+    if(e.target.files.length) {
+      props.setPhoto(e.target.files[0])
+    }
+  }
   return (
     <div>
-      <img src={props.profile.photos.large} 
-            alt='здесь расположена аватарка' className={styles.ava}/>
+      {
+        props.profile.photos.large ?
+        (<div>
+          <img src={props.profile.photos.large} 
+              alt='здесь расположена аватарка' className={styles.ava}/>
+        </div>) : 
+        (<div>
+          <img src='https://pbs.twimg.com/profile_images/460533834547601408/5bbvogtJ.jpeg'
+              alt='здесь расположена аватарка' className={styles.ava}/>
+          <br></br>
+          <input type='file' onChange={setPhoto}/>
+        </div>)
+      }
+      
       <div className={styles.descriptionBlock}>
         Login - {props.profile.fullName}
         <br></br>
