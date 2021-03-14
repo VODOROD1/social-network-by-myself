@@ -10,7 +10,8 @@ import reportWebVitals from './reportWebVitals';
 export const rerenderEntireTree = (store) => { 
   ReactDOM.render(
     <BrowserRouter>
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)}
+              addPost={store.addPost}/>
     </BrowserRouter>,
     document.getElementById('root')
   )

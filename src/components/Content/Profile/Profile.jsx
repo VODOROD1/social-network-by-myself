@@ -1,6 +1,6 @@
 import  React from 'react';
-import ProfileInfo from './ProfileInfo';
-import MyPosts from '../Posts/MyPosts.jsx';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
+import MyPosts from './Posts/MyPosts';
 
 const Profile = (props) => {
   return (
