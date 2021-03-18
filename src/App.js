@@ -1,51 +1,42 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Content/Profile/Profile';
-import Dialogs from './components/Content/Dialogs/Dialogs';
+import HeaderContainer from './components/Header/HeaderContainer';
+import AsideContainer from './components/Aside/AsideContainer';
+import ProfileContainer from './components/Content/Profile/ProfileContainer';
+import DialogsContainer from './components/Content/Dialogs/DialogsContainer';
 import News from './components/Content/News/News';
 import Music from './components/Content/Music/Music';
-import Users from './components/Content/Users/Users';
+import UsersContainer from './components/Content/Users/UsersContainer';
 import Settings from './components/Content/Settings/Settings';
+import Login from './components/Content/Login/Login'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <div className="app-wrapper">
-        <Header />
-        <Navbar friends={this.props.state.sideBar.friends}/>
+        <HeaderContainer />
+        <AsideContainer />
         <div className='app-wrapper-content'>
-          <Route path='/profile' key={1} 
+          <Route path='/profile/:userId?' key={1} 
                   render={() => 
-                      <Profile 
-                          posts={this.props.state.profilePage.posts} 
-                          newPostText={this.props.state.profilePage.newPostText}
-                          dispatch={this.props.dispatch} 
-                          addPost={this.props.addPost}
-                      />}
+                      <ProfileContainer />}
           />
           <Route path='/dialogs' key={2} 
                   render={() => 
-                      <Dialogs 
-                            dialogItems={this.props.state.dialogsPage.dialogItems} 
-                            messages={this.props.state.dialogsPage.messages}
-                            dispatch={this.props.dispatch} 
-                            newMessageText={this.props.state.dialogsPage.newMessageText}
-                      />}
+                      <DialogsContainer />}
           />
           <Route path='/news' key={3} 
                   render={() => <News />}/>
           <Route path='/music' key={4} 
                   render={() => <Music />}/>
           <Route path='/users' key={5} 
-                  render={() => <Users />}/>
+                  render={() => <UsersContainer />}/>
           <Route path='/settings' key={6} 
                   render={() => <Settings />}/>
+          <Route path='/login' key={7}
+                  render={() => {return <Login />}}/>
         </div>
       </div>
     );

@@ -1,0 +1,53 @@
+.wrapper {
+
+}
+
+$max: 12;
+$size: 120px;
+$fill: orangered;
+$angle: 360/$max;
+
+.r_bounds {
+  fill: none;
+  stroke: #AAA;
+  }
+
+.svg_preloader {
+  height: $size;
+  width: $size;
+  }
+
+.g_circles {
+  fill: $fill;
+  }
+
+.u_circle {
+  transform-origin: $size/2 $size/2;
+  animation: 1.2s linear infinite;
+  animation-name: colors,opacity;
+  
+  @for $item from 1 through $max {
+    &:nth-child(#{$max}n + #{$item}){
+      transform: rotate(#{-$angle*$item}deg) translate(10px, 10px) scale(.85);
+     animation-delay: -#{$item/10}s;
+    }
+  }
+}
+
+@keyframes opacity {
+  0% {
+    fill-opacity: 1;
+  }
+  75% {
+    fill-opacity: 0;
+  }
+}
+
+@keyframes colors {
+  0% {
+    fill: orangered;
+    }
+  50% {
+    fill: teal;
+  }
+}

@@ -1,0 +1,87 @@
+.wrapper {
+    // background-color: pink;
+    width: 600px;
+    margin-left: 50px;
+}
+
+.avaStatus {
+    display: inline-block;
+    // background-color: gray;
+    height: 100px;
+    width: 95px;
+    vertical-align: top;
+    margin-top: 10px;
+    &_wrapper {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    &_ava {
+        border-radius: 20px;
+    }
+    &_followedFlag__green {
+        height: 5px;
+        width: 50px;
+        background-color: green;
+    }
+    &_followedFlag__red {
+        height: 5px;
+        width: 50px;
+        background-color: red;
+    }
+    &_followButton {
+        width: 90px;
+        border-radius: 5px;
+        color: white;
+        background-color: green;
+    }
+    &_followButton[disabled] {
+        background-color: gray
+    }
+    &_unfollowButton {
+        width: 90px;
+        border-radius: 5px;
+        color: white;
+        background-color: red;
+    }
+    &_unfollowButton[disabled] {
+        background-color: gray
+    }
+}
+
+.data {
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    border: 2px solid gray;
+    border-radius: 10px;
+    width: 400px;
+    p {
+        margin: 0;
+        text-align: right;
+    }
+    &_wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+    &_name {
+        display: inline-block;
+        vertical-align: top;
+        
+       
+    }
+    &_location {
+        display: inline-block;
+        &_country {
+            
+        }
+        &_city {
+            margin-top: 10px!important;
+        }
+    }
+    &_status {
+        
+    }
+}

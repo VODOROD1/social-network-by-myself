@@ -1,0 +1,15 @@
+.pagination {
+    margin: 20px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.selectedPage:hover {
+    font-weight: bold;
+}
+
+.page:hover {
+    cursor: pointer;
+}

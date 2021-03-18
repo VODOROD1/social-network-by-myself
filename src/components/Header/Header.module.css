@@ -1,9 +1,19 @@
 img {
   width: 50px;
   height: 50px;
+  display: inline-block;
 }
 
 .header {
   grid-area: h;
   background-color: lightcoral;
+}
+
+.login {
+  vertical-align: top;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 50px;
+  padding: 20px;
+  
 }

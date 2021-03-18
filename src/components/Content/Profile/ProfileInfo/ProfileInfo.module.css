@@ -1,7 +1,12 @@
-.ava {
-  width: 900px;
-  height: 450px;
+.wrapper {
+  padding-left: 20px;
 }
+
+.ava {
+  width: 300px;
+  height: 200px;
+}
+
 .descriptionBlock {
   padding: 10px;
 }

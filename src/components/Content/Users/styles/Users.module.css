@@ -1,0 +1,20 @@
+.wrapper {
+  width: 700px;
+}
+
+.header {
+  margin: 20px 50px;
+}
+
+.showMore {
+  background-color: green;
+  color: white;
+  width: 170px;
+  height: 45px;
+  font-size: 18px;
+  font-family: Arial;
+  border: none;
+  margin: 20px;
+  margin-left: calc(50% - 85px);
+}
+/*# sourceMappingURL=Users.module.css.map */
