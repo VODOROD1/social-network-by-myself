@@ -20,9 +20,10 @@ const ProfileContainer = (props) => {
             userId = userIdFromURL
         } else if(authId) {
             userId = authId
-        } else {
-            userId = 2
         }
+        // } else {
+        //     userId = 2
+        // }
         
         let thunk1 = setUserProfileTC(userId)
         props.setUserProfile(thunk1)

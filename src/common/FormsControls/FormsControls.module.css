@@ -1,11 +1,10 @@
-.formControl {
+.formControlTextarea.error textarea {
+  border: 1px red solid; }
+.formControlTextarea.error span {
+  color: red; }
+.formControlTextarea textarea {
+  display: block; }
+.formControlTextarea span {
+  display: block; }
 
-}
-
-.error input {
-
-}
-
-.error textarea {
-    border: 1px red solid;
-}
+/*# sourceMappingURL=FormsControls.module.css.map */
