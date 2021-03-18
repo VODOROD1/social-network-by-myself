@@ -2,26 +2,22 @@ import React from 'react'
 import {connect} from 'react-redux'
 import Header from './Header'
 import {authMeTC} from '../../redux/reducers/auth-reducer'
+import {logoutTC} from '../../redux/reducers/auth-reducer'
 
 const HeaderContainer = (props) => {
-
-    // const setAuthUserData = (email, id, login) => {
-    //     let action = setAuthUserDataAC(email, id, login)
-    //     props.setAuthUserData(action)
-    // }
-
-    // const setMyProfile = (userId) => {
-    //     let thunk = setUserProfileTC(userId)
-    //     props.setMyProfile(thunk)
-    // }
 
     React.useEffect(() => { // Запрос на взятие аутентификационных данных
         let thunk = authMeTC()
         props.authMe(thunk)
     },[])
 
+    const logout = (e) => {
+        let thunk = logoutTC()
+        props.logout(thunk)
+    }
+
     return (
-        <Header {...props}/>
+        <Header {...props} logout={logout}/>
     )
 }
 
@@ -37,6 +33,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProp = (dispatch) => {
     return {
         authMe: (thunk) => {
+            dispatch(thunk)
+        },
+        logout: (thunk) => {
             dispatch(thunk)
         }
     }

@@ -7,7 +7,7 @@ import {loginTC} from '../../../redux/reducers/auth-reducer'
 const LoginContainer = (props) => {
 
     const invokeLogin = (formData) => {
-        let thunk = loginTC()
+        let thunk = loginTC(formData.email,formData.password,formData.rememberMe)
         props.invokeLogin(thunk)
     }
 

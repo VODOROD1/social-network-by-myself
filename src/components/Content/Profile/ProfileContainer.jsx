@@ -6,7 +6,6 @@ import Profile from './Profile'
 import {updateNewPostTextAC,addNewPostAC,setUserProfileTC,
         getStatusTC,updateStatusTC} from '../../../redux/reducers/profile-reducer';
 import Preloader from '../../../common/Preloader/Preloader'
-import {Redirect} from 'react-router-dom'
 import redirectHOC from '../../../common/HOC/redirectHOC'
 import preloaderHOC from '../../../common/HOC/preloaderHOC'
 
@@ -31,15 +30,15 @@ const ProfileContainer = (props) => {
         props.setStatus(thunk2)     // прокидываем статус с сервера в наш store 
     },[props.authId])
 
-    const addNewPost = (e) => {
-        let action = addNewPostAC()
+    const addNewPost = (formData) => {
+        let action = addNewPostAC(formData.newPostText)
         props.addNewPost(action)
     }
 
-    const updateNewPostText = (e) => {
-        let action = updateNewPostTextAC(e.target.value)
-        props.updateNewPostText(action)
-    }
+    // const updateNewPostText = (e) => {
+    //     let action = updateNewPostTextAC(e.target.value)
+    //     props.updateNewPostText(action)
+    // }
 
     const updateStatus = (newStatus) => {
         let thunk = updateStatusTC(newStatus)
@@ -53,12 +52,12 @@ const ProfileContainer = (props) => {
 
             props.profile ? 
             <Profile 
-                newPostText={props.newPostText} 
+                // newPostText={props.newPostText} 
                 posts={props.posts}
                 profile={props.profile}
                 status={props.status}
                 addNewPost={addNewPost}
-                updateNewPostText={updateNewPostText}
+                // updateNewPostText={updateNewPostText}
                 updateStatus={updateStatus}
             /> :
             <Preloader />
@@ -72,7 +71,7 @@ const ProfileContainer = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        newPostText: state.profile.newPostText,
+        // newPostText: state.profile.newPostText,
         posts: state.profile.posts,
         profile: state.profile.profile,
         preloaderFlag: !Boolean(state.profile.profile),
@@ -84,7 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProp = (dispatch) => {
     return {
         addNewPost: (action) => {dispatch(action)},
-        updateNewPostText: (action) => {dispatch(action)},
+        // updateNewPostText: (action) => {dispatch(action)},
         setUserProfile: (thunk) => {dispatch(thunk)},
         updateStatus: (thunk) => {dispatch(thunk)},
         setStatus: (thunk) => {dispatch(thunk)}

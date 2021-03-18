@@ -27,7 +27,9 @@ const authReducer = (state=initialState, action) => {
             }
         case LOG_OUT:
             return {
-
+                ...state,
+                id: null,
+                isAuth: action.isAuth
             }
         default:
         return state
@@ -50,9 +52,10 @@ const loginAC = (id) => {
     }
 }
 
-const logoutAC = () => {
+const logoutAC = (isAuth) => {
     return {
-        type: LOG_OUT
+        type: LOG_OUT,
+        isAuth
     }
 }
 
@@ -76,7 +79,20 @@ export const loginTC = (email,password,rememberMe) => {
         authAPI.login(email,password,rememberMe)
                 .then((data) => {
                     if(data.resultCode === 0) {
-                        dispatch(loginAC(data.data.id))
+                        dispatch(loginAC(data.data.userId))
+                        dispatch(authMeTC())
+                    }
+                })
+    }
+}
+
+export const logoutTC = () => {
+    return (dispatch) => {
+        authAPI.logout()
+                .then((data) => {
+                    if(data.resultCode === 0) {
+                        let isAuth = false
+                        dispatch(logoutAC(isAuth))
                     }
                 })
     }

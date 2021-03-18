@@ -6,7 +6,6 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
-  newPostText: '',
   profile: null,
   status: '',
   posts: 
@@ -39,15 +38,15 @@ const profileReducer = (state=initialState, action) => {
     case ADD_NEW_POST:
       let newPost = {
           id: state.posts.length+1,
-          postText: state.newPostText, 
+          postText: action.newPostText, 
           likesCount: 0
       }
       return {...state,
               newPostText: '',
               posts: [...state.posts,newPost]
       }
-    case UPDATE_NEW_POST_TEXT:
-      return {...state, newPostText: action.newPostText}
+    // case UPDATE_NEW_POST_TEXT:
+    //   return {...state, newPostText: action.newPostText}
     case SET_USER_PROFILE:
       return {...state, profile: action.profile}
     case SET_STATUS:
@@ -58,16 +57,17 @@ const profileReducer = (state=initialState, action) => {
 }
 
 // Далее идут action creators
-export const updateNewPostTextAC = (newText) => {
-  return {
-    type: 'UPDATE_NEW_POST_TEXT',
-    newPostText: newText
-  }
-}
+// export const updateNewPostTextAC = (newText) => {
+//   return {
+//     type: 'UPDATE_NEW_POST_TEXT',
+//     newPostText: newText
+//   }
+// }
 
-export const addNewPostAC = () => {
+export const addNewPostAC = (newPostText) => {
   return {
-    type: 'ADD_NEW_POST'
+    type: 'ADD_NEW_POST',
+    newPostText
   }
 }
 

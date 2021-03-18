@@ -9,7 +9,7 @@ import News from './components/Content/News/News';
 import Music from './components/Content/Music/Music';
 import UsersContainer from './components/Content/Users/UsersContainer';
 import Settings from './components/Content/Settings/Settings';
-import Login from './components/Content/Login/Login'
+import LoginContainer from './components/Content/Login/LoginContainer'
 
 class App extends React.Component {
 
@@ -36,7 +36,7 @@ class App extends React.Component {
           <Route path='/settings' key={6} 
                   render={() => <Settings />}/>
           <Route path='/login' key={7}
-                  render={() => {return <Login />}}/>
+                  render={() => {return <LoginContainer />}}/>
         </div>
       </div>
     );

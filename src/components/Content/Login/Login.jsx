@@ -9,7 +9,7 @@ const LoginForm = (props) => {
         <form className='form' onSubmit={props.handleSubmit}>
             <div>
                 <Field component={'input'} type='text' className={styles.loginText} 
-                placeholder='Login' name={'login'}/>
+                placeholder='Login' name={'email'}/>
             </div>
             <div>
                 <Field component={'input'} type='password' className={styles.passwordText} 
@@ -17,7 +17,7 @@ const LoginForm = (props) => {
             </div>
             <div>
                 <Field component={'input'} type='checkbox' className={styles.check}
-                        name={'remember me'}/> remember me
+                        name={'rememberMe'}/> remember me
             </div>
             <div>
                 <button className={styles.signIn}>Sign in</button>
