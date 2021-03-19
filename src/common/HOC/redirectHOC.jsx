@@ -4,9 +4,6 @@ import {connect} from 'react-redux'
 
 const redirectHOC = (WrappedComp) => {
     const newComp = class extends React.Component {
-        constructor(props) {
-            super(props)
-        }
         render() {
             return (
                 <>

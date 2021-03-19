@@ -1,8 +1,10 @@
 .wrapper {
-
+  height: 200px;
+  width: 200px;
 }
 
 $max: 12;
+$preloaderSize: 250px;
 $size: 120px;
 $fill: orangered;
 $angle: 360/$max;
@@ -13,8 +15,8 @@ $angle: 360/$max;
   }
 
 .svg_preloader {
-  height: $size;
-  width: $size;
+  height: $preloaderSize;
+  width: $preloaderSize;
   }
 
 .g_circles {

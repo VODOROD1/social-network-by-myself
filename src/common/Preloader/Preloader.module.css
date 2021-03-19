@@ -1,10 +1,14 @@
+.wrapper {
+  height: 200px;
+  width: 200px; }
+
 .r_bounds {
   fill: none;
   stroke: #AAA; }
 
 .svg_preloader {
-  height: 120px;
-  width: 120px; }
+  height: 250px;
+  width: 250px; }
 
 .g_circles {
   fill: orangered; }

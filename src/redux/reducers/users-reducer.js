@@ -113,6 +113,7 @@ export const toggleIsFollowingProgressAC = (isFetching,userId) => {
 export const setUsersTC = (pageSize,currentPage,totalUsersCount) => {
     return (dispatch) => {
         dispatch(toggleIsFetchingAC(true))
+        dispatch(setCurrentPageAC(currentPage))
         usersAPI.getUsers(pageSize,currentPage)     // Получаем пользователей с сервера
             .then(data => {
                 dispatch(setUsersAC(data.items))    // Прокидываем в store массив юзеров                  

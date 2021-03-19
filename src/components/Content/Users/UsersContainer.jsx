@@ -6,6 +6,8 @@ import {followTC,unfollowTC,setCurrentPageAC,
         setUsersTC} from '../../../redux/reducers/users-reducer'
 import preloaderHOC from '../../../common/HOC/preloaderHOC' 
 import Preloader from '../../../common/Preloader/Preloader'
+import {getUsers,getPageSize,getTotalUsersCount,getCurrentPage,getIsFetching,
+        getPreloaderFlag,getFollowingInProgress} from '../../../redux/selectors/users-selector'
 
 const UsersContainer = (props) => {
 
@@ -56,13 +58,13 @@ const UsersContainer = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.users.users,
-        pageSize: state.users.pageSize,
-        totalUsersCount: state.users.totalUsersCount,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        preloaderFlag: state.users.isFetching,
-        followingInProgress: state.users.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        preloaderFlag: getPreloaderFlag(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
