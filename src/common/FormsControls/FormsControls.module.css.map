@@ -1,7 +1,9 @@
 {
-"version": 3,
-"mappings": "AAEQ,mCAAS;EACL,MAAM,EAAE,aAAa;AAEzB,+BAAK;EACD,KAAK,EAAE,GAAG;AAGlB,6BAAS;EACL,OAAO,EAAE,KAAK;AAGlB,yBAAK;EACD,OAAO,EAAE,KAAK",
-"sources": ["FormsControls.module.scss"],
-"names": [],
-"file": "FormsControls.module.css"
+    "version": 3,
+    "mappings": "AAAA,AAEQ,oBAFY,AACf,MAAM,CACH,QAAQ,CAAC;EACL,MAAM,EAAE,aAAa;CACxB;;AAJT,AAKQ,oBALY,AACf,MAAM,CAIH,IAAI,CAAC;EACD,KAAK,EAAE,GACX;CAAC;;AAPT,AASI,oBATgB,CAShB,QAAQ,CAAC;EACL,OAAO,EAAE,KAAK;CACjB;;AAXL,AAaI,oBAbgB,CAahB,IAAI,CAAC;EACD,OAAO,EAAE,KAAK;CACjB",
+    "sources": [
+        "FormsControls.module.scss"
+    ],
+    "names": [],
+    "file": "FormsControls.module.css"
 }

@@ -23,6 +23,8 @@ const UsersContainer = (props) => {
         setPagesCount(pagesCount)   
     },[props.totalCount])
 
+    console.log('UsersContainer')
+
     const setCurrentPage = (currentPage) => {
         let action = setCurrentPageAC(currentPage)
         props.setCurrentPage(action)
@@ -57,6 +59,7 @@ const UsersContainer = (props) => {
 }
 
 const mapStateToProps = (state) => {
+    console.log('mapStateToProps UsersContainer')
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),

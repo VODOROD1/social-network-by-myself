@@ -1,6 +1,9 @@
 
 export const getUsers = (state) => {
     return state.users.users
+    // return state.users.users.filter((user) => {
+    //     return {...user}
+    // })
 }
 
 export const getPageSize = (state) => {

@@ -30,8 +30,8 @@ export const setInitializeTC = () => {
     return (dispatch) => {
         let thunk = authMeTC()        // Запрос на взятие аутентификационных данных
         dispatch(thunk).then((data) => {
-            let initialized = true
-            dispatch(setInitializeAC(initialized))
+            // let initialized = true
+            dispatch(setInitializeAC(true))
         })
     }
 }

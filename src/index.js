@@ -7,6 +7,9 @@ import './index.css';
 import AppContainer from './AppContainer';
 import reportWebVitals from './reportWebVitals';
 
+setInterval(() => {
+    store.dispatch({type: 'TEST_ACTION'})
+},1000)
 
   ReactDOM.render(
     <BrowserRouter>

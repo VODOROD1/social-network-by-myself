@@ -1,19 +1,9 @@
 import React from "react";
 import SidebarItem from './SidebarItem'
 import styles from './Sidebar.module.css'
+import getKey from '../../../common/key/createKey'
 
 const Sidebar = (props) => {
-
-    const getKey = (str) => {
-        let key = 0
-        for(let i=0; i<str.length; i++) {
-            let currentCode = str.charCodeAt(str[i])
-            key += str.charCodeAt(str[i])
-            continue
-        }
-        let stringKey = key.toString() 
-        return key.toString()
-    }
 
     let reactElems = props.friends.map((elem) => {
         return (

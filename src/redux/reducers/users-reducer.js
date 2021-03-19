@@ -15,6 +15,7 @@ let initialState = {
     currentPage: 10,
     isFetching: false,
     followingInProgress: [],
+    test: 0
 }
 
 const usersReducer = (state=initialState, action) => {
@@ -57,6 +58,8 @@ const usersReducer = (state=initialState, action) => {
                 [...state.followingInProgress, action.userId] :
                 [...state.followingInProgress.filter(id => id !== action.userId)]
             }
+        case 'TEST_ACTION':
+            return {...state}
         default:
             return state
     }

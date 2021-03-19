@@ -11,7 +11,7 @@ const Pagination = (props) => {
         for(let i=1; i<=30; i++) {
             temp.push(
                 <span className={props.currentPage === i ? styles.selectedPage : styles.page}
-                        onClick={() => {props.setCurrentPage(i)}}
+                        onClick={() => {props.setCurrentPage(i)}} key={i}
                 > {i} </span>
             )
         }
