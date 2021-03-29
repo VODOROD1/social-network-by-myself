@@ -21,3 +21,7 @@ Application consists three layer:
   1) UI 
   2) BLL 
   3) DAL
+
+## Launch project
+`npm init` 
+`npm start`
