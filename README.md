@@ -25,3 +25,7 @@ Application consists three layer:
 ## Launch project
 `npm init` 
 `npm start`
+
+## LOGIN & PASSWORD
+SomeTestLogin
+R6n1gAZ43K9
