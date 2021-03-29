@@ -27,3 +27,27 @@ const Users = (props) => {
 }
 
 export default Users;
+
+
+
+// class ClassTest extends React.Component {
+//     state = {count:0}
+
+//     componentDidMount() {
+//       this.id = setInterval(() => {
+//         this.setState({count: this.state.count + 1})
+//       },1000)
+//     }
+//     componentWillUnmount() {
+//       clearInterval(this.id)
+//     }
+
+//     render() {
+//       return (
+//         <div>
+
+//         </div>
+//       )
+//     }
+// }
+

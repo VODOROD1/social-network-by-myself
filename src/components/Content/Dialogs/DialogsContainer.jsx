@@ -3,6 +3,7 @@ import Dialogs from './Dialogs'
 import {addNewMessageAC} from '../../../redux/reducers/dialogs-reducer';
 import {connect} from 'react-redux'
 import redirectHOC from '../../../common/HOC/redirectHOC'
+import suspenseHOC from '../../../common/HOC/suspenseHOC'
 import {compose} from 'redux'
 
 const DialogsContainer = (props) => {
@@ -38,6 +39,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps,mapDispatchToProps),
-    redirectHOC     // Перенаправление на стр логинизации
+    redirectHOC,     // Перенаправление на стр логинизации
+    suspenseHOC
 )(DialogsContainer)
 // export default connect(mapStateToProps,mapDispatchToProps)(redirectHOC(DialogsContainer))

@@ -1,22 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import store from './redux/redux-store'
-import './index.css';
-import AppContainer from './AppContainer';
 import reportWebVitals from './reportWebVitals';
+import AppWithProvider from './AppContainer'
 
-setInterval(() => {
-    store.dispatch({type: 'TEST_ACTION'})
-},1000)
+// setInterval(() => {
+//     store.dispatch({type: 'TEST_ACTION'})
+// },1000)
 
   ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
-    </BrowserRouter>,
+    <AppWithProvider />,
     document.getElementById('root')
   )
 

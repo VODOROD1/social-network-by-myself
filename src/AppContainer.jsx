@@ -2,6 +2,9 @@ import React from 'react'
 import App from './App'
 import {connect} from 'react-redux'
 import {setInitializeTC} from './redux/reducers/app-reducer'
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from 'react-redux'
+import store from './redux/redux-store'
 
 const AppContainer = (props) => {
 
@@ -29,5 +32,16 @@ const mapDispatchToProp = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProp)(AppContainer)
+const ConnectedAppContainer = connect(mapStateToProps,mapDispatchToProp)(AppContainer)
 
+const AppWithProvider =  (props) => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <ConnectedAppContainer />
+            </Provider>
+        </BrowserRouter>
+    )
+}
+
+export default AppWithProvider

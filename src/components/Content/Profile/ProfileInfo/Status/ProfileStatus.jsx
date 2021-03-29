@@ -19,7 +19,7 @@ const ProfileStatus = (props) => {
 
     const editModeOFF = (e) => {
         setEditMode(false)
-        props.updateStatus(localStatus)
+        props.updateStatus(localStatus) // отправка нового статуса на сервер
     }
 
     return (

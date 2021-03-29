@@ -114,43 +114,40 @@ export const toggleIsFollowingProgressAC = (isFetching,userId) => {
 
 // THUNKS
 export const setUsersTC = (pageSize,currentPage,totalUsersCount) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetchingAC(true))
         dispatch(setCurrentPageAC(currentPage))
-        usersAPI.getUsers(pageSize,currentPage)     // Получаем пользователей с сервера
-            .then(data => {
-                dispatch(setUsersAC(data.items))    // Прокидываем в store массив юзеров                  
-                if(totalUsersCount === 0) {
-                    dispatch(setTotalUsersCountAC(data.totalCount)) // Прокидываем в store общее количество юзеров
-                }
-                dispatch(toggleIsFetchingAC(false))
-            })
+        let response = await usersAPI.getUsers(pageSize,currentPage)     // Получаем пользователей с сервера
+        dispatch(setUsersAC(response.items))    // Прокидываем в store массив юзеров                  
+        if(totalUsersCount === 0) {
+            dispatch(setTotalUsersCountAC(response.totalCount)) // Прокидываем в store общее количество юзеров
+        }
+        dispatch(toggleIsFetchingAC(false))
     }
 }
 
-export const followTC = (id) => {
-    return (dispatch) => {
+export const followUnfollowCommonFunc = async (dispatch,id,followUnfollowAC,api) => {
+    // return async (dispatch) => {
         dispatch(toggleIsFollowingProgressAC(true,id))
-        usersAPI.follow(id)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(followAC(id))
-                }
-                dispatch(toggleIsFollowingProgressAC(false,id))
-            })
+        let response = await api(id)
+        if(response.resultCode === 0) {
+            dispatch(followUnfollowAC(id))
+        }
+        dispatch(toggleIsFollowingProgressAC(false,id))
+    //}
+}
+
+export const followTC = (id) => {
+    return async (dispatch) => {
+        let api = usersAPI.follow.bind(usersAPI)
+        followUnfollowCommonFunc(dispatch,id,followAC,api)
     }
 }
 
 export const unfollowTC = (id) => {
-    return (dispatch) => {
-        dispatch(toggleIsFollowingProgressAC(true,id))
-        usersAPI.unfollow(id)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(unfollowAC(id))
-                }
-                dispatch(toggleIsFollowingProgressAC(false,id))
-            })
+    return async (dispatch) => {
+        let api = usersAPI.unfollow.bind(usersAPI)
+        followUnfollowCommonFunc(dispatch,id,unfollowAC,api)
     }
 }
 

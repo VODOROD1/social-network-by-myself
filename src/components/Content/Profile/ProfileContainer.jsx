@@ -8,6 +8,7 @@ import {updateNewPostTextAC,addNewPostAC,setUserProfileTC,
 import Preloader from '../../../common/Preloader/Preloader'
 import redirectHOC from '../../../common/HOC/redirectHOC'
 import preloaderHOC from '../../../common/HOC/preloaderHOC'
+import suspenseHOC from '../../../common/HOC/suspenseHOC'
 
 const ProfileContainer = (props) => {
 
@@ -31,10 +32,10 @@ const ProfileContainer = (props) => {
         props.setStatus(thunk2)     // прокидываем статус с сервера в наш store 
     },[props.authId])
 
-    const addNewPost = (formData) => {
+    const addNewPost = React.useCallback((formData) => {
         let action = addNewPostAC(formData.newPostText)
         props.addNewPost(action)
-    }
+    },[props.addNewPost])
 
     // const updateNewPostText = (e) => {
     //     let action = updateNewPostTextAC(e.target.value)
@@ -95,5 +96,6 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProp),
     // redirectHOC,    // Перенаправление на страницу логинизации
     // preloaderHOC,   // Отображение прелоадера
-    withRouter      // получение доступа к URL
+    withRouter,      // получение доступа к URL
+    suspenseHOC
 )(ProfileContainer)

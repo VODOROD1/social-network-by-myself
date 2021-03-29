@@ -7,6 +7,7 @@ import authReducer from './reducers/auth-reducer'
 import appReducer from './reducers/app-reducer'
 import thunkMiddleware from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
+import {composeWithDevTools } from 'redux-devtools-extension'
 
 let reducers = combineReducers({
         dialogs: dialogsReducer,
@@ -19,7 +20,9 @@ let reducers = combineReducers({
     }
 )
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+let store = createStore(reducers, composeWithDevTools (
+    applyMiddleware(thunkMiddleware)
+))
 
 window.store = store
 

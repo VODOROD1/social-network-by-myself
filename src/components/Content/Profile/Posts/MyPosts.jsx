@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import styles from './MyPosts.module.css'
 import Post from './Post/Post';
 import getKey from '../../../../common/key/createKey'
@@ -26,7 +26,7 @@ const newPostForm = (props) => {
 const NewPostReduxForm = reduxForm({form: 'newPostForm'})(newPostForm)
 
 const MyPosts = (props) => {
-
+  console.log('MyPosts render!')
   return (
     <div className={styles.wrapper}>
         <NewPostReduxForm onSubmit={props.addNewPost} placeholder='Enter your post' />
@@ -38,4 +38,4 @@ const MyPosts = (props) => {
 
 }
 
-export default MyPosts;
+export default React.memo(MyPosts);

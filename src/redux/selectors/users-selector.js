@@ -29,3 +29,4 @@ export const getPreloaderFlag = (state) => {
 export const getFollowingInProgress = (state) => {
     return state.users.followingInProgress
 }
+
