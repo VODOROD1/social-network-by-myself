@@ -36,7 +36,7 @@ const ConnectedAppContainer = connect(mapStateToProps,mapDispatchToProp)(AppCont
 
 const AppWithProvider =  (props) => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <ConnectedAppContainer />
             </Provider>
