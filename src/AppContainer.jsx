@@ -2,7 +2,7 @@ import React from 'react'
 import App from './App'
 import {connect} from 'react-redux'
 import {setInitializeTC} from './redux/reducers/app-reducer'
-import {BrowserRouter} from 'react-router-dom'
+import {BrowserRouter, HashRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
 import store from './redux/redux-store'
 
@@ -36,11 +36,11 @@ const ConnectedAppContainer = connect(mapStateToProps,mapDispatchToProp)(AppCont
 
 const AppWithProvider =  (props) => {
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter>
             <Provider store={store}>
                 <ConnectedAppContainer />
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 

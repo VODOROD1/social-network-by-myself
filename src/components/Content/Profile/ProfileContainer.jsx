@@ -4,13 +4,14 @@ import {withRouter} from 'react-router-dom'
 import {compose} from 'redux'
 import Profile from './Profile'
 import {updateNewPostTextAC,addNewPostAC,setUserProfileTC,
-        getStatusTC,updateStatusTC} from '../../../redux/reducers/profile-reducer';
+        getStatusTC,updateStatusTC,savePhotoTC} from '../../../redux/reducers/profile-reducer';
 import Preloader from '../../../common/Preloader/Preloader'
 import redirectHOC from '../../../common/HOC/redirectHOC'
 import preloaderHOC from '../../../common/HOC/preloaderHOC'
 import suspenseHOC from '../../../common/HOC/suspenseHOC'
 
 const ProfileContainer = (props) => {
+    const [isOwner,setIsOwner] = React.useState()
 
     React.useEffect(() => {
         let userId = null
@@ -19,9 +20,16 @@ const ProfileContainer = (props) => {
 
         if(userIdFromURL) {
             userId = userIdFromURL
+            setIsOwner(false)
         } else if(authId) {
             userId = authId
+            setIsOwner(true)
         }
+
+        // if(userIdFromURL === authId) { 
+        //     setIsOwner(true)
+        // } else
+
         // } else {
         //     userId = 2
         // }
@@ -47,6 +55,11 @@ const ProfileContainer = (props) => {
         props.updateStatus(thunk)
     }
 
+    const savePhoto = (photo) => {
+        let thunk = savePhotoTC(photo)
+        props.savePhoto(thunk)
+    }
+
     return (
         <>
         {
@@ -59,7 +72,8 @@ const ProfileContainer = (props) => {
                 profile={props.profile}
                 status={props.status}
                 addNewPost={addNewPost}
-                // updateNewPostText={updateNewPostText}
+                isOwner={isOwner}
+                savePhoto={savePhoto}
                 updateStatus={updateStatus}
             /> :
             <Preloader />
@@ -88,7 +102,8 @@ const mapDispatchToProp = (dispatch) => {
         // updateNewPostText: (action) => {dispatch(action)},
         setUserProfile: (thunk) => {dispatch(thunk)},
         updateStatus: (thunk) => {dispatch(thunk)},
-        setStatus: (thunk) => {dispatch(thunk)}
+        setStatus: (thunk) => {dispatch(thunk)},
+        savePhoto: (thunk) => {dispatch(thunk)}
     }
 }
 

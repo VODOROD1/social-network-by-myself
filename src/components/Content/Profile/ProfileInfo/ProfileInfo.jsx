@@ -9,6 +9,8 @@ const ProfileInfo = (props) => {
                 props.profile.photos.large :
             'https://wallbox.ru/wallpapers/main2/201742/zakat-more-plaz-tropiki12.jpg'} 
             alt='здесь расположена аватарка' className={styles.ava}/>
+      <br></br>
+      {props.isOwner && <input type={'file'} onChange={(e) => props.savePhoto(e.target.files[0])}/>}
       <div className={styles.descriptionBlock}>
         {props.profile.fullName}
         <br></br>

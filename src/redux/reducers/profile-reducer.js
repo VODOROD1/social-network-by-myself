@@ -4,6 +4,7 @@ const ADD_NEW_POST = 'ADD_NEW_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
+const SAVE_PHOTO = 'SAVE_PHOTO'
 
 let initialState = {
   profile: null,
@@ -51,6 +52,8 @@ const profileReducer = (state=initialState, action) => {
       return {...state, profile: action.profile}
     case SET_STATUS:
       return {...state, status: action.status}
+    case SAVE_PHOTO:
+      return {...state, profile: {...state.profile, photos: {...state.profile.photos, large:action.photo}}}
     default:
       return state
   }
@@ -85,6 +88,13 @@ const setStatusAC = (status) => {
   }
 }
 
+const savePhotoAC = (photo) => {
+  return {
+    type: SAVE_PHOTO,
+    photo
+  }
+}
+
 // THUNKS
 export const setUserProfileTC = (userId) => {
   return (dispatch) => {
@@ -114,6 +124,15 @@ export const updateStatusTC = (newStatus) => {
         dispatch(setStatusAC(newStatus))
       }
     })
+  }
+}
+
+export const savePhotoTC = (photo) => {
+  return async (dispatch) => {
+      let result = await profileAPI.savePhoto(photo)
+      if(result.resultCode === 0) {
+          dispatch(savePhotoAC(photo))
+      }
   }
 }
 
