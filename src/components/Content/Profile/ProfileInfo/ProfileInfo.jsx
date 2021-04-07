@@ -1,6 +1,7 @@
 import  React from 'react';
 import styles from './ProfileInfo.module.css';
-import ProfileStatus from './Status/ProfileStatus'
+import ProfileStatus from './Status/ProfileStatus';
+import ProfileDataContainer from './ProfileData/ProfileDataContainer'
 
 const ProfileInfo = (props) => {
   return (
@@ -12,22 +13,13 @@ const ProfileInfo = (props) => {
       <br></br>
       {props.isOwner && <input type={'file'} onChange={(e) => props.savePhoto(e.target.files[0])}/>}
       <div className={styles.descriptionBlock}>
-        {props.profile.fullName}
-        <br></br>
         <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
-        {props.profile.lookingForAJobDescription}
-        <br></br>
-        {props.profile.aboutMe}
-        <br></br>
-        <div>
-          <b>Contacts</b>
-          <p>facebook - {props.profile.contacts.facebook}</p>
-          <p>twitter - {props.profile.contacts.twitter}</p>
-          <p>github - {props.profile.contacts.github}</p>
-        </div>
+        <ProfileDataContainer />
       </div>
     </div>
   )
 }
+
+
 
 export default ProfileInfo;
