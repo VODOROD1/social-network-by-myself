@@ -39,6 +39,12 @@ export const profileAPI = {
                         return response.data
                     })
     },
+    setProfileData(data) {
+        return api.put('profile/', {data})
+                    .then((response) => {
+                        return response.data
+                    })
+    },
     getStatus(userId) {
         return api.get(`/profile/status/${userId}`)
             .then((response) => {

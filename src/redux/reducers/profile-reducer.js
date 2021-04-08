@@ -5,6 +5,7 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const SAVE_PHOTO = 'SAVE_PHOTO'
+const SET_PROFILE_DATA = 'SET_PROFILE_DATA'
 
 let initialState = {
   profile: null,
@@ -95,6 +96,13 @@ const savePhotoAC = (photo) => {
   }
 }
 
+const setProfileDataAC = (data) => {
+  return {
+    type: SET_PROFILE_DATA,
+    data
+  }
+}
+
 // THUNKS
 export const setUserProfileTC = (userId) => {
   return (dispatch) => {
@@ -133,6 +141,14 @@ export const savePhotoTC = (photo) => {
       if(result.resultCode === 0) {
           dispatch(savePhotoAC(photo))
       }
+  }
+}
+
+export const setProfileDataTC = (data) => {
+  return async (dispatch) => {
+    let formData = new FormData(data)
+    profileAPI.setProfileData(formData)
+    dispatch(setProfileDataAC())
   }
 }
 

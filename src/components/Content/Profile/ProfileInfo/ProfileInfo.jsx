@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
       {props.isOwner && <input type={'file'} onChange={(e) => props.savePhoto(e.target.files[0])}/>}
       <div className={styles.descriptionBlock}>
         <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
-        <ProfileDataContainer />
+        <ProfileDataContainer isOwner={props.isOwner}/>
       </div>
     </div>
   )
