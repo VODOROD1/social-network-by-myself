@@ -40,7 +40,7 @@ export const profileAPI = {
                     })
     },
     setProfileData(data) {
-        return api.put('profile/', {data})
+        return api.put('profile', data)
                     .then((response) => {
                         return response.data
                     })
