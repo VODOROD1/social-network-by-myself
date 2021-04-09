@@ -26,7 +26,7 @@ const ProfileData = (props) => {
         <>
         {
         editMode ?
-        <ProfileDataReduxForm onSubmit={handleSubmit} editModeOff={editModeOff} profile={props.profile}/> :
+        <ProfileDataReduxForm onSubmit={handleSubmit} editModeOff={editModeOff} initialValues={props.profile} profile={props.profile}/> :
         <ProfileDataStatic editModeOn={editModeOn} profile={props.profile} isOwner={props.isOwner}/>
         }
         </>
