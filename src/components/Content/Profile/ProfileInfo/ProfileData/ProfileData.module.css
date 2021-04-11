@@ -3,3 +3,11 @@
     width: 70px;
 }
 
+.commonError {
+    color: lightcoral;
+    border: 1px solid darkred;
+    width: auto;
+    display: inline-block;
+    padding: 5px;
+}
+

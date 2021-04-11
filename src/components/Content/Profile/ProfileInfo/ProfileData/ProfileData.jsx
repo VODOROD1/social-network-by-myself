@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './ProfileData.module.css'
 import {Field,reduxForm} from 'redux-form'
+// import {Input, TextArea} from './CustomField'
+import {Input, Textarea} from '../../../../../common/FormsControls/FormsControls'
 
 const ProfileData = (props) => {
     const [editMode, setEditMode] = React.useState(false)
@@ -13,20 +15,35 @@ const ProfileData = (props) => {
         setEditMode(false)
     }
 
-    const saveData = (data) => {
-        props.setProfileData(data)
+    // const saveData = (data) => {
+    //     let result = props.setProfileData(data)
+    //     return result.then((response) => response)   // возвращается промис после установки данных
+    // }
+
+    const saveData = async (data) => {
+        console.log('saveData1')
+        // let result = await props.setProfileData(data)
+        console.log('saveData2')
+        return await props.setProfileData(data)   // возвращается промис после установки данных
     }
 
     const handleSubmit = (profileData) => {
-        editModeOff()
-        saveData(profileData)
+        console.log('handleSubmit1')
+        let promise = saveData(profileData)
+        console.log('handleSubmit2')
+        promise.then(() => {
+            console.log('editModeOff')
+            editModeOff()
+        })
+        console.log('handleSubmit3')
     }
 
     return (
         <>
         {
         editMode ?
-        <ProfileDataReduxForm onSubmit={handleSubmit} editModeOff={editModeOff} initialValues={props.profile} profile={props.profile}/> :
+        <ProfileDataReduxForm onSubmit={handleSubmit} editModeOff={editModeOff} 
+                initialValues={{...props.profile,...props.profile.contacts}} profile={props.profile}/> :
         <ProfileDataStatic editModeOn={editModeOn} profile={props.profile} isOwner={props.isOwner}/>
         }
         </>
@@ -34,37 +51,51 @@ const ProfileData = (props) => {
 }
 
 const ProfileDataForm = (props) => {
-    let contactsFormsArr = []
-    for(let i=0; i<Object.keys(props.profile.contacts).length; i++) {
-        // let keys = Object.keys(contacts)[i]
-        // let values = Object.values(contacts)[i]
-        // let currentElem = {contactName: Object.keys(contacts)[i], contactValue: Object.values(contacts)[i]}
-        contactsFormsArr.push({contactName: Object.keys(props.profile.contacts)[i], contactValue: Object.values(props.profile.contacts)[i]})
-    }
+
+    let contactsFormsArr = React.useMemo(() => {
+        let localArr = []
+        for(let i=0; i<Object.keys(props.profile.contacts).length; i++) {
+            localArr.push(
+                {
+                    contactName: Object.keys(props.profile.contacts)[i], 
+                    contactValue: Object.values(props.profile.contacts)[i]
+                }
+            )
+        }
+        return localArr
+    },[props.profile.contacts])
+
     return (
         <form onSubmit={props.handleSubmit}>
-            <p><Field component={'input'} type={'submit'} value={'Save'}/>    
-                <button onCLick={props.editModeOff}>Cancel</button>
+            <p>
+                <button>Save</button>   <button onCLick={props.editModeOff}>Cancel</button>
             </p>
+            {
+                props.error ?
+                <div className={styles.commonError}>
+                    {props.error}
+                </div> :
+                null
+            }
             <div>
                 <b>Full name:</b>
-                <p><Field component={'input'} type={'text'} 
-                        value={props.profile.fullName} name={'fullName'}/></p>
+                <p><Field component={Input} type={'text'} 
+                        name={'fullName'}/></p>
             </div>
             <div>
                 <b>About Me</b>
-                <p><Field component={'input'} type={'text'}
-                        value={props.profile.aboutMe} name={'aboutMe'}/></p>
+                <p><Field component={Input} type={'text'}
+                        name={'aboutMe'}/></p>
             </div>
             <div>
-                <b>Looking for a job: </b> 
-                <p><Field component={'input'} type={'checkbox'}
-                        value={props.profile.lookingForAJob} name={'lookingForAJob'}/></p>
+                <b>Looking for a job: </b>
+                <p><Field component={Input} type={'checkbox'}
+                        name={'lookingForAJob'}/></p>
             </div>
             <div>
                 <b>Looking for a job description: </b>
-                <p><Field component={'textarea'} name={'lookingForAJobDescription'}
-                        value={props.profile.lookingForAJobDescription}/></p>
+                <p><Field component={Textarea} name={'lookingForAJobDescription'}
+                        /></p>
             </div>
             <div>
                 <b>Contacts</b>
@@ -72,9 +103,8 @@ const ProfileDataForm = (props) => {
                 {contactsFormsArr.map((contact) => {
                     return (
                         <p>
-                        <div className={styles.nameOfContact}>{contact.contactName}</div> : 
-                        <Field component={'input'} type={'text'} name={contact.contactName}
-                                    value={contact.contactValue}/>
+                        <div className={styles.nameOfContact}>{contact.contactName}</div> 
+                        <Field component={Input} type={'text'} name={contact.contactName}/>
                         </p>
                     )
                 })}

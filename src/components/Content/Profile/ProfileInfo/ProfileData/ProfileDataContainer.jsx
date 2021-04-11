@@ -5,15 +5,18 @@ import {setProfileDataTC} from '../../../../../redux/reducers/profile-reducer'
 
 const ProfileDataContainer = (props) => {
 
-    const setProfileData = (data) => {
+    const setProfileData = async (data) => {
+        console.log('setProfileData1')
         let newObj = createObjOfNewProfile(data)
         let thunk = setProfileDataTC(newObj)
-        props.setProfileData(thunk)
+        // let result = await props.setProfileData(thunk)
+        console.log('setProfileData2')
+        // return result.then((response) => response)
+        return await props.setProfileData(thunk)
     }
 
     const createObjOfNewProfile = (data) => {
         let newObj = {
-            // profile: {
                 userId:                     props.profile.userId,
                 aboutMe:                    data.aboutMe,
                 lookingForAJob:             data.lookingForAJob,
@@ -32,7 +35,6 @@ const ProfileDataContainer = (props) => {
                 photos: {
                     large: props.profile.photos.large
                 }
-            // }
         }
         return newObj
     }

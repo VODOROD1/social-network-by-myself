@@ -44,6 +44,9 @@ export const profileAPI = {
                     .then((response) => {
                         return response.data
                     })
+                    // .catch(() => {
+                    //     console.log('!!!ERROR!!!')
+                    // })
     },
     getStatus(userId) {
         return api.get(`/profile/status/${userId}`)
@@ -55,9 +58,9 @@ export const profileAPI = {
         return api.put(`/profile/status`,{
                 status: newStatus
             })
-                  .then((response) => {
-                      return response.data.resultCode
-                  })
+            .then((response) => {
+                return response.data.resultCode
+            })
     },
     savePhoto(photo) {
         let photoData = new FormData()

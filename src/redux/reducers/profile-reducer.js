@@ -1,4 +1,5 @@
 import {profileAPI} from '../../api/api'
+import {stopSubmit} from 'redux-form'
 
 const ADD_NEW_POST = 'ADD_NEW_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
@@ -141,14 +142,28 @@ export const setProfileDataTC = (data) => {
     let response = await profileAPI.setProfileData(data)
     if(response.resultCode === 0) {
       dispatch(setUserProfileAC(data))
+      return Promise.resolve(true)
     } else {
-      let result = [];
-      for (let i=0; response.messages.length > i; i++) {
-          result.push(response.messages[i])
-      }
-      // dispatch(stopSubmit("edit-profile", {_error: result })); 
-      return Promise.reject(result); 
+      let errors = validateErrorMessages(response.messages)
+      dispatch(stopSubmit("ProfileData", errors));
+      // let newPromise = Promise.reject(errors)
+      return Promise.reject(errors);
     }
+  }
+}
+
+const validateErrorMessages = (messages) => {
+  const regExp = />\w+/
+  let errors = {}
+  // let errors = []
+  for(let i=0; messages.length > i; i++) {
+      // errorsArr.push(response.messages[i])
+      if(regExp.test(messages[i])) {
+        let temp = messages[i].match(regExp)[0]
+        let nameField = temp[1].toLowerCase() + temp.slice(2)
+        errors[nameField] = messages[i]
+        // errors.push(response.messages[i])
+      }
   }
 }
 
