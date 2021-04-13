@@ -5,15 +5,28 @@ import {setProfileDataTC} from '../../../../../redux/reducers/profile-reducer'
 
 const ProfileDataContainer = (props) => {
 
-    const setProfileData = async (data) => {
-        console.log('setProfileData1')
+    const [editMode, setEditMode] = React.useState(false)
+
+    const editModeOn = () => {
+        setEditMode(true)
+    }
+
+    const editModeOff = () => {
+        setEditMode(false)
+    }
+
+    const onSubmit = (data) => {
         let newObj = createObjOfNewProfile(data)
         let thunk = setProfileDataTC(newObj)
-        // let result = await props.setProfileData(thunk)
-        console.log('setProfileData2')
-        // return result.then((response) => response)
-        return await props.setProfileData(thunk)
+        props.setProfileData(thunk).then((response) => {
+            editModeOff()
+        })
     }
+        // let result = await props.setProfileData(thunk)
+        // console.log('setProfileData2')
+        // return result
+        // return result.then((response) => response)
+        // return props.setProfileData(thunk)
 
     const createObjOfNewProfile = (data) => {
         let newObj = {
@@ -41,8 +54,11 @@ const ProfileDataContainer = (props) => {
 
     return (
         <ProfileData profile={props.profile} 
-                    setProfileData={setProfileData}
+                    onSubmit={onSubmit}
                     isOwner={props.isOwner}
+                    editMode={editMode}
+                    editModeOn={editModeOn}
+                    editModeOff={editModeOff}
         />
     )
 }

@@ -5,14 +5,14 @@ import {Field,reduxForm} from 'redux-form'
 import {Input, Textarea} from '../../../../../common/FormsControls/FormsControls'
 
 const ProfileData = (props) => {
-    const [editMode, setEditMode] = React.useState(false)
+    // const [editMode, setEditMode] = React.useState(false)
 
     const editModeOn = () => {
-        setEditMode(true)
+        props.editModeOn()
     }
 
     const editModeOff = () => {
-        setEditMode(false)
+        props.editModeOff()
     }
 
     // const saveData = (data) => {
@@ -20,29 +20,39 @@ const ProfileData = (props) => {
     //     return result.then((response) => response)   // возвращается промис после установки данных
     // }
 
-    const saveData = async (data) => {
-        console.log('saveData1')
-        // let result = await props.setProfileData(data)
-        console.log('saveData2')
-        return await props.setProfileData(data)   // возвращается промис после установки данных
-    }
+    // const saveData = async (data) => {
+    //     let result = await props.setProfileData(data)
+    //     return result
+    // }
 
-    const handleSubmit = (profileData) => {
-        console.log('handleSubmit1')
-        let promise = saveData(profileData)
-        console.log('handleSubmit2')
-        promise.then(() => {
-            console.log('editModeOff')
-            editModeOff()
-        })
-        console.log('handleSubmit3')
-    }
+    // const handleSubmit = (profileData) => {
+    //     saveData(profileData).then(() => {
+    //         editModeOff()
+    //     })
+    // }
+        // console.log('handleSubmit2')
+        //     if(result) {
+        //         console.log('editModeOff')
+        //         editModeOff()
+        //     } else {
+        //         console.log(result)
+        //     }
+
+        // result.then((flag) => {
+        //     if(flag) {
+        //         console.log('editModeOff')
+        //         editModeOff()
+        //     }
+        // }, (errors) => {
+        //     console.log(errors)
+        // })
+
 
     return (
         <>
         {
-        editMode ?
-        <ProfileDataReduxForm onSubmit={handleSubmit} editModeOff={editModeOff} 
+        props.editMode ?
+        <ProfileDataReduxForm onSubmit={props.onSubmit} editModeOff={editModeOff} 
                 initialValues={{...props.profile,...props.profile.contacts}} profile={props.profile}/> :
         <ProfileDataStatic editModeOn={editModeOn} profile={props.profile} isOwner={props.isOwner}/>
         }

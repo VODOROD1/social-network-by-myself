@@ -142,16 +142,16 @@ export const setProfileDataTC = (data) => {
     let response = await profileAPI.setProfileData(data)
     if(response.resultCode === 0) {
       dispatch(setUserProfileAC(data))
-      return Promise.resolve(true)
+      // return Promise.resolve(false)
     } else {
       let errors = validateErrorMessages(response.messages)
       dispatch(stopSubmit("ProfileData", errors));
-      // let newPromise = Promise.reject(errors)
       return Promise.reject(errors);
     }
   }
 }
 
+// Валидация ошибок в результате запроса
 const validateErrorMessages = (messages) => {
   const regExp = />\w+/
   let errors = {}
@@ -165,6 +165,7 @@ const validateErrorMessages = (messages) => {
         // errors.push(response.messages[i])
       }
   }
+  return errors
 }
 
 export default profileReducer;
