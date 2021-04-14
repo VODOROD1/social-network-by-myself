@@ -18,15 +18,14 @@ const ProfileDataContainer = (props) => {
     const onSubmit = (data) => {
         let newObj = createObjOfNewProfile(data)
         let thunk = setProfileDataTC(newObj)
-        props.setProfileData(thunk).then((response) => {
+        let response = props.setProfileData(thunk)
+        response.then(() => {
+            console.log(response)
             editModeOff()
+        }, () => {
+            console.log(response)
         })
     }
-        // let result = await props.setProfileData(thunk)
-        // console.log('setProfileData2')
-        // return result
-        // return result.then((response) => response)
-        // return props.setProfileData(thunk)
 
     const createObjOfNewProfile = (data) => {
         let newObj = {
@@ -71,8 +70,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setProfileData: (thunk) => {
-            dispatch(thunk)
+        setProfileData: async (thunk) => {
+            return await dispatch(thunk)
         }
     }
 }

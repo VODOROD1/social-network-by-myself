@@ -109,7 +109,7 @@ const mapDispatchToProp = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProp),
-    // redirectHOC,    // Перенаправление на страницу логинизации
+    redirectHOC,    // Перенаправление на страницу логинизации
     // preloaderHOC,   // Отображение прелоадера
     withRouter,      // получение доступа к URL
     suspenseHOC

@@ -6,19 +6,19 @@ import {loginTC} from '../../../redux/reducers/auth-reducer'
 
 const LoginContainer = (props) => {
 
-    const invokeLogin = (formData) => {
-        let thunk = loginTC(formData.email,formData.password,formData.rememberMe)
+    const invokeLogin = ({email,password,rememberMe,captcha}) => {
+        let thunk = loginTC(email,password,rememberMe,captcha)
         props.invokeLogin(thunk)
     }
 
     return (
-        <Login invokeLogin={invokeLogin}/>
+        <Login invokeLogin={invokeLogin} captchaURL={props.captchaURL}/>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-
+        captchaURL: state.auth.captchaURL
     }
 }
 

@@ -142,7 +142,7 @@ export const setProfileDataTC = (data) => {
     let response = await profileAPI.setProfileData(data)
     if(response.resultCode === 0) {
       dispatch(setUserProfileAC(data))
-      // return Promise.resolve(false)
+      return Promise.resolve(false)
     } else {
       let errors = validateErrorMessages(response.messages)
       dispatch(stopSubmit("ProfileData", errors));

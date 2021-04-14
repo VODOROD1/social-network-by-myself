@@ -25,6 +25,14 @@ const LoginForm = (props) => {
                         name={'rememberMe'}/> remember me
             </div>
             {
+                props.captchaURL &&
+                <div className={styles.captchaWrapper} name={'styles'}>
+                    <img src={props.captchaURL} className={styles.captcha} alt={'captcha'}/>
+                    <Field component={Input} type='text' className={styles.captchaField}
+                            name={'captcha'}/>
+                </div>
+            }
+            {
                 props.error ?
                 <div className={styles.commonError}>
                     {'Login or password is wrong!'}
@@ -48,7 +56,8 @@ const Login = (props) => {
             <Redirect to='/profile' /> :
             <div className={styles.wrapper}>
                 <h1>Login</h1>
-                <LoginReduxForm onSubmit={props.invokeLogin}/>
+                <LoginReduxForm onSubmit={props.invokeLogin}
+                                captchaURL={props.captchaURL}/>
             </div>
         }
         </>

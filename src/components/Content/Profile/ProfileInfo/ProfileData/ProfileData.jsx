@@ -15,39 +15,6 @@ const ProfileData = (props) => {
         props.editModeOff()
     }
 
-    // const saveData = (data) => {
-    //     let result = props.setProfileData(data)
-    //     return result.then((response) => response)   // возвращается промис после установки данных
-    // }
-
-    // const saveData = async (data) => {
-    //     let result = await props.setProfileData(data)
-    //     return result
-    // }
-
-    // const handleSubmit = (profileData) => {
-    //     saveData(profileData).then(() => {
-    //         editModeOff()
-    //     })
-    // }
-        // console.log('handleSubmit2')
-        //     if(result) {
-        //         console.log('editModeOff')
-        //         editModeOff()
-        //     } else {
-        //         console.log(result)
-        //     }
-
-        // result.then((flag) => {
-        //     if(flag) {
-        //         console.log('editModeOff')
-        //         editModeOff()
-        //     }
-        // }, (errors) => {
-        //     console.log(errors)
-        // })
-
-
     return (
         <>
         {

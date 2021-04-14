@@ -84,14 +84,20 @@ export const authAPI = {
                     return response.data
                 })
     },
-    login(email,password,rememberMe) {
-        return api.post('/auth/login',{email,password,rememberMe})
+    login(email,password,rememberMe,captcha) {
+        return api.post('/auth/login',{email,password,rememberMe,captcha})
                 .then((response) => {
                     return response.data
                 })
     },
     logout() {
         return api.delete('/auth/login')
+                .then((response) => {
+                    return response.data
+                })
+    },
+    getCaptcha() {
+        return api.get('/security/get-captcha-url')
                 .then((response) => {
                     return response.data
                 })
