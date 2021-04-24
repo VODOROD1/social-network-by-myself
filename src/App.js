@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 import AsideContainer from './components/Aside/AsideContainer';
@@ -31,6 +31,7 @@ class App extends React.Component {
           <HeaderContainer />
           <AsideContainer />
           <div className='app-wrapper-content'>
+          <Switch>
             <Route path='/profile/:userId?' key={1} 
                     render={suspenseHOC(ProfileContainer)}
             />
@@ -47,6 +48,9 @@ class App extends React.Component {
                     render={() => <Settings />}/>
             <Route path='/login' key={7}
                     render={() => {return <LoginContainer />}}/>
+            <Route path='*' key={8}
+                    render={() => {return <div>404 PAGE NOT FOUND</div>}}/>
+          </Switch>
           </div>
         </div>) :
         <Preloader />

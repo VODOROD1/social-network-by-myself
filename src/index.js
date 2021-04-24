@@ -7,10 +7,7 @@ import AppWithProvider from './AppContainer'
 //     store.dispatch({type: 'TEST_ACTION'})
 // },1000)
 
-  ReactDOM.render(
-    <AppWithProvider />,
-    document.getElementById('root')
-  )
+  ReactDOM.render(<AppWithProvider />,document.getElementById('root'))
 
 
 // export const rerenderEntireTree = (store) => { 

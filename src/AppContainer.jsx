@@ -36,11 +36,11 @@ const ConnectedAppContainer = connect(mapStateToProps,mapDispatchToProp)(AppCont
 
 const AppWithProvider =  (props) => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Provider store={store}>
                 <ConnectedAppContainer />
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
     )
 }
 

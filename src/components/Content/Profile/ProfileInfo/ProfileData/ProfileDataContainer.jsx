@@ -20,10 +20,10 @@ const ProfileDataContainer = (props) => {
         let thunk = setProfileDataTC(newObj)
         let response = props.setProfileData(thunk)
         response.then(() => {
-            console.log(response)
+            // console.log(response)
             editModeOff()
         }, () => {
-            console.log(response)
+            // console.log(response)
         })
     }
 

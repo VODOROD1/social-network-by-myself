@@ -60,6 +60,10 @@ const Login = (props) => {
                                 captchaURL={props.captchaURL}/>
             </div>
         }
+        {
+            <input type={'file'} id={'field'}/>
+
+        }
         </>
     )
 }

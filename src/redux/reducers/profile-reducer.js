@@ -9,6 +9,7 @@ const SAVE_PHOTO = 'SAVE_PHOTO'
 
 let initialState = {
   profile: null,
+  profileUpdateFlag: false,
   status: '',
   posts: 
   [
